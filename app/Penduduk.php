@@ -83,7 +83,8 @@ class Penduduk extends Authenticatable
 
         if($this->administrator){
             $this->status=7;
-            $this->administrator->delete();
+            $admin=$this->administrator;
+            $admin->delete();
         }
 
         $this->save();
@@ -107,7 +108,8 @@ class Penduduk extends Authenticatable
         }
 
         if($this->administrator){
-            $this->administrator->restore();
+            $admin=$this->administrator;
+            $admin->restore();
             $this->status=5;
         }
         $this->save();

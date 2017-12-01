@@ -28,6 +28,10 @@ class DetailLaporanController extends Controller
        DB::beginTransaction();
        $penduduk=Penduduk::find(\Auth::user()->penduduk);
        $laporan=Laporan::find($request['detail_laporan']);
+       if($laporan->status==4){
+        $request->session()->flash('warning','Laporan sudah selesai!');
+        return back();
+       }
         $detail_laporan=$laporan->detail_laporan()->create(['penduduk'=>$penduduk->id, 'komentar'=>$request['komentar']]);
         if($request->hasfile('foto')){
          $files = $request->file('foto');
@@ -67,7 +71,13 @@ class DetailLaporanController extends Controller
     {
       try{
         DB::beginTransaction();
-        $data=Detail_laporan::where(['id'=>$request['id'],'laporan'=>$request['id-laporan']])->update(['komentar'=>$request['komentar']]);
+        $data=Detail_laporan::where(['id'=>$request['id'],'laporan'=>$request['id-laporan']])->first();
+        $data->update(['komentar'=>$request['komentar']]);
+        if($data->Laporan->status==4){
+        $request->session()->flash('warning','Laporan sudah selesai!');
+        DB::rollback();
+        return back();
+        }
         DB::commit();
       }catch(Exception $e){
         DB::rollback();

@@ -110,7 +110,7 @@ class StatusLaporanController extends Controller
     {
         $Status_laporan=Status_laporan::withTrashed()->where('nama',$id)->first();
         if($Status_laporan!=null){
-            $laporan=$Status_laporan->laporan->all();
+            $laporan=$Status_laporan->laporan()->withTrashed()->get();
             return view('administrator.listlaporan')->with(compact('laporan'));
         }else{
             return redirect('/administrator/status/laporan');

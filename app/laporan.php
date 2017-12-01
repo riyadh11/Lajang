@@ -45,14 +45,13 @@ class laporan extends Model
 
     public function delete()
     {
+
         foreach($this->detail_laporan->all() as $detail_laporan){
             $detail_laporan->delete();
         }
 
-        foreach($this->pertanggungJawaban->all() as $pertanggungJawaban){
-            $pertanggungJawaban->delete();
-        }
-
+        $p=$this->pertanggungJawaban()->withTrashed()->first();
+        $p->delete();
         parent::delete();
     }
 
@@ -63,9 +62,8 @@ class laporan extends Model
             $detail_laporan->restore();
         }
 
-        foreach($this->pertanggungJawaban()->withTrashed()->get() as $pertanggungJawaban){
-            $pertanggungJawaban->restore();
-        }
+        $p=$this->pertanggungJawaban()->withTrashed()->first();
+        $p->restore();
     }
 
 }

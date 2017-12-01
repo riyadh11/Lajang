@@ -44,6 +44,7 @@ class PertanggungJawabanController extends LaporanController
         $request->session()->flash('status','Tidak ditemukan!');
         return redirect('/penduduk/home'); 
        }else{
+        $lpj=true;
         $judul_laporan=$exp[0];
         $lat=$exp[1];
         $long=$exp[2];
@@ -56,11 +57,9 @@ class PertanggungJawabanController extends LaporanController
           $request->session()->flash('warning','LPJ Belum boleh dibuat!');
          return back();
         }else if($laporan->pertanggungjawaban!=null){
-          $request->session()->flash('warning','LPJ Sudah dibuat!');
-         return back();
-        }else{
-         return view('administrator.pertanggungjawaban')->with(compact('laporan'));
+          $lpj=false;
         }
+        return view('Administrator.pertanggungjawaban')->with(compact('lpj','laporan'));
         }
     }
 
@@ -93,7 +92,7 @@ class PertanggungJawabanController extends LaporanController
       }catch(Exception $e){
         DB::rollback();
       }
-      return view('administrator.home');
+      return back();
     }
 
 }

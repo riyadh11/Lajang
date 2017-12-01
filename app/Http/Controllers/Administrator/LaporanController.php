@@ -48,7 +48,7 @@ class LaporanController extends Controller
       $exp=explode("+", $id);
       if(count($exp)!=3){
         $request->session()->flash('status','Tidak ditemukan!');
-        return redirect('/administrator/home'); 
+        return redirect('/administrator/laporan'); 
       }else{
         $judul_laporan=$exp[0];
         $lat=$exp[1];
@@ -58,7 +58,10 @@ class LaporanController extends Controller
         $statuses=Status_Laporan::all();
         if($laporan==null or $laporan->trashed()){
           $request->session()->flash('warning','Laporan tidak aktif!');
-          return redirect('/administrator/home'); 
+          return redirect('/administrator/laporan'); 
+        }elseif($laporan->status==4){
+          $request->session()->flash('warning','Laporan sudah selesai!');
+          return redirect('/administrator/laporan'); 
         }else{
           return view('administrator.editLaporan')->with(compact('laporan','kategoris','statuses'));
         }
@@ -81,6 +84,10 @@ class LaporanController extends Controller
       }
       if($request['status']==1){
         $request->session()->flash('warning', 'Tidak boleh kembali ke status awal!');
+        return back();
+      }
+      if(laporan::find($request['id'])->status==4){
+        $request->session()->flash('warning', 'Laporan sudah selesai!');
         return back();
       }
       try{
@@ -115,8 +122,10 @@ class LaporanController extends Controller
          $request->session()->flash('status','Tidak ditemukan!');
          return back();
         }else{
-          $laporan->status=2;
-          $laporan->save();
+          if($laporan->status==1){
+            $laporan->status=2;
+            $laporan->save();
+          }
          return view('administrator.lihatlaporan')->with(compact('laporan'));
         }
         }

@@ -1,6 +1,7 @@
 <?php
 
 Route::get('/','Administrator\HomeController@index')->middleware('auth');
+Route::get('/home','Administrator\HomeController@index')->middleware('auth');
 // Awal Laporan Controller //
 Route::get('/laporan','Administrator\LaporanController@list')->middleware('auth');
 Route::get('/laporan/{id}','Administrator\LaporanController@show')->middleware('auth');

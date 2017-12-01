@@ -30,7 +30,7 @@ class pertanggung_jawaban extends Model
 
     public function delete()
     {
-        foreach($this->Biaya->all() as $Biaya){
+        foreach($this->Biaya()->withTrashed()->get() as $Biaya){
             $Biaya->delete();
         }
         parent::delete();

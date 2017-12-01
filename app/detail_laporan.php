@@ -19,7 +19,7 @@ class detail_laporan extends Model
     	return $this->belongsTo('App\Penduduk','penduduk');
     }
 
-    public function laporan()
+    public function Laporan()
     {
     	return $this->belongsTo('App\laporan','laporan');
     }
