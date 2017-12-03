@@ -15,24 +15,24 @@ class kecamatan extends Model
         'nama',
     ];
 
-    public function kelurahan()
+    public function Kelurahan()
     {
     	return $this->hasMany('App\kelurahan','kecamatan');
     }
 
     public function delete()
     {
-    	foreach($this->kelurahan->all() as $kelurahan){
+    	foreach($this->Kelurahan->all() as $kelurahan){
     		$kelurahan->delete();
     	}
     	parent::delete();
     }
 
-    public function laporan()
+    public function Laporan()
     {
         $laporan=new Collection();
-        foreach($this->kelurahan()->withTrashed()->get() as $kelurahan){
-            foreach ($kelurahan->laporan()->withTrashed()->get() as $lapor) {
+        foreach($this->Kelurahan()->withTrashed()->get() as $kelurahan){
+            foreach ($kelurahan->Laporan()->withTrashed()->get() as $lapor) {
                 $laporan=$laporan->push($lapor);
             }
         }
@@ -44,7 +44,7 @@ class kecamatan extends Model
     public function restore()
     {
     	parent::restore();
-    	foreach($this->kelurahan()->withTrashed()->get() as $kelurahan){
+    	foreach($this->Kelurahan()->withTrashed()->get() as $kelurahan){
     		$kelurahan->restore();
     	}
     }

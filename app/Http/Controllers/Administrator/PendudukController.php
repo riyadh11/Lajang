@@ -68,7 +68,7 @@ class PendudukController extends Controller
     {
         $Penduduk=Penduduk::withTrashed()->where('nik',$id)->first();
         if($Penduduk!=null){
-            $laporan=$Penduduk->laporan->all();
+            $laporan=$Penduduk->Laporan->all();
             return view('administrator.listlaporan')->with(compact('laporan'));
         }else{
             return redirect('/administrator/penduduk');

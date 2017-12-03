@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 Route::get('/laporan','Pengguna\HomeController@list');
 Route::get('/laporan/{id}','Pengguna\HomeController@show');
+Route::get('/kategori/{id}','Pengguna\HomeController@kategori');
+Route::get('/status/{id}','Pengguna\HomeController@status');
 
 Route::group(['prefix' => 'penduduk'], function () {
   Route::get('/login', 'PendudukAuth\LoginController@showLoginForm')->name('login');

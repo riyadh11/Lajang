@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
 use App\laporan;
+use App\Kategori;
+use App\Status_Laporan;
 
 class HomeController extends Controller
 {
@@ -32,5 +34,27 @@ class HomeController extends Controller
 	       return view('pengguna.lihatlaporan')->with(compact('laporan'));
 	      }
 	      }
+    }
+
+    public function kategori($id, Request $request)
+    {
+        $kategori=Kategori::where('nama',$id)->first();
+        if($kategori!=null){
+            $laporan=$kategori->Laporan()->get();
+            return view('pengguna.listlaporan')->with(compact('laporan'));
+        }else{
+            return redirect('/laporan');
+        }
+    }
+
+    public function status($id, Request $request)
+    {
+        $status=Status_Laporan::where('nama',$id)->first();
+        if($status!=null){
+            $laporan=$status->Laporan()->get();
+            return view('pengguna.listlaporan')->with(compact('laporan'));
+        }else{
+            return redirect('/laporan');
+        }
     }
 }

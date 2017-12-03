@@ -14,7 +14,7 @@ class detail_laporan extends Model
         'laporan', 'penduduk', 'komentar',
     ];
 
-    public function penduduk()
+    public function Penduduk()
     {
     	return $this->belongsTo('App\Penduduk','penduduk');
     }
@@ -24,23 +24,23 @@ class detail_laporan extends Model
     	return $this->belongsTo('App\laporan','laporan');
     }
 
-    public function foto_laporan()
+    public function Foto_Laporan()
     {
         return $this->hasMany('App\foto_laporan','laporan');
     }
 
-    public function vote()
+    public function Vote()
     {
         return $this->hasMany('App\vote','laporan');
     }
 
     public function delete()
     {
-        foreach($this->foto_laporan->all() as $foto_laporan){
+        foreach($this->Foto_Laporan->all() as $foto_laporan){
             $foto_laporan->delete();
         }
 
-        foreach($this->vote->all() as $vote){
+        foreach($this->Vote->all() as $vote){
             $vote->delete();
         }
         parent::delete();
@@ -49,21 +49,21 @@ class detail_laporan extends Model
     public function restore()
     {
         parent::restore();
-        foreach($this->foto_laporan()->withTrashed()->get() as $foto_laporan){
+        foreach($this->Foto_Laporan()->withTrashed()->get() as $foto_laporan){
             $foto_laporan->restore();
         }
 
-        foreach($this->vote()->withTrashed()->get() as $vote){
+        foreach($this->Vote()->withTrashed()->get() as $vote){
             $vote->restore();
         }
     }
 
-    public function reputation()
+    public function Reputation()
     {
         $plus=0;
         $negative=0;
         $reputation=0;
-        foreach ($this->vote->all() as $vote) {
+        foreach ($this->Vote->all() as $vote) {
             if($vote->like){
                 $plus++;
             }else{

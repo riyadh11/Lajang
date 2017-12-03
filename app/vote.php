@@ -14,12 +14,12 @@ class vote extends Model
         'laporan', 'voter', 'like',
     ];
 
-    public function laporan()
+    public function Laporan()
     {
     	return $this->belongsTo('App\detail_laporan','laporan');
     }
 
-    public function voter()
+    public function Voter()
     {
     	return $this->belongsTo('App\Penduduk','voter');
     }

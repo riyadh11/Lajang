@@ -20,11 +20,11 @@ class HomeController extends Controller
     public function index()
     {
     	$penduduk=Penduduk::withTrashed()->where('status','<','5')->get();
-    	$laporan=$this->getMax(laporan::withTrashed()->get(), 'detail_laporan');
-    	$kategori=$this->getMax(kategori::withTrashed()->get(), 'laporan');
+    	$laporan=$this->getMax(laporan::withTrashed()->get(), 'Detail_laporan');
+    	$kategori=$this->getMax(kategori::withTrashed()->get(), 'Laporan');
     	$penduduk2=$this->getMax($penduduk,'detail_laporan');
-    	$kecamatan=$this->getMax(Kecamatan::withTrashed()->get(), 'laporan');
-    	$kelurahan=$this->getMax(Kecamatan::withTrashed()->get(), 'laporan');
+    	$kecamatan=$this->getMax(Kecamatan::withTrashed()->get(), 'Laporan');
+    	$kelurahan=$this->getMax(Kecamatan::withTrashed()->get(), 'Laporan');
       return view('Administrator.Home')->with(compact('penduduk','laporan','kategori','penduduk2','kecamatan','kelurahan'));
     }
 

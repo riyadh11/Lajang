@@ -105,9 +105,14 @@ class LaporanController extends Controller
       $long=$exp[2];
 
       $laporan=laporan::where(['judul_laporan'=>$judul_laporan,'lat'=>$lat,'long'=>$long, 'pelapor' => \Auth::user()->id])->first();
+      if($laporan->status!=1){
+        $request->session()->flash('warning', 'Laporan sedang ditangani!');
+        return back();
+      }
       $kategoris=Kategori::all();
       if($laporan==null){
        return redirect('/penduduk/home'); 
+       $request->session()->flash('warning', 'Laporan tidak ditemukan!');
       }else{
        return view('penduduk.editLaporan')->with(compact('laporan','kategoris'));
       }
@@ -126,6 +131,10 @@ class LaporanController extends Controller
       $kelurahan=Kelurahan::where('kodepos',$locate['kodepos'])->first();
       if($kelurahan==null){
         $request->session()->flash('warning', 'Area diluar malang!');
+        return back();
+      }
+      if(laporan::find($request['id'])->status!=1){
+        $request->session()->flash('warning', 'Laporan sedang ditangani!');
         return back();
       }
       try{
@@ -161,6 +170,11 @@ class LaporanController extends Controller
       }
       $location = array('alamat' => $data,'kodepos' => $data2 );
       return $location;
+    }
+
+    public function FunctionName($value='')
+    {
+      # code...
     }
 
 

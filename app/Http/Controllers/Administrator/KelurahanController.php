@@ -111,7 +111,7 @@ class KelurahanController extends Controller
     {
         $Kelurahan=Kelurahan::withTrashed()->where('nama',$id)->first();
         if($Kelurahan!=null){
-            $laporan=$Kelurahan->laporan->all();
+            $laporan=$Kelurahan->Laporan->all();
             return view('administrator.listlaporan')->with(compact('laporan'));
         }else{
             return redirect('/administrator/daerah/kelurahan');

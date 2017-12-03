@@ -13,14 +13,14 @@ class status_penduduk extends Model
         'nama', 'deskripsi'
     ];
 
-    public function penduduk()
+    public function Penduduk()
     {
     	return $this->hasMany('App\penduduk','status');
     }
 
     public function delete()
     {
-    	foreach($this->penduduk->all() as $penduduk){
+    	foreach($this->Penduduk->all() as $penduduk){
     		$penduduk->delete();
     	}
     	parent::delete();
@@ -29,7 +29,7 @@ class status_penduduk extends Model
     public function restore()
     {
     	parent::restore();
-    	foreach($this->penduduk()->withTrashed()->get() as $penduduk){
+    	foreach($this->Penduduk()->withTrashed()->get() as $penduduk){
     		$penduduk->restore();
     	}
     }

@@ -13,7 +13,7 @@ class foto_laporan extends Model
         'laporan', 'url_gambar',
     ];
 
-    public function detail_laporan()
+    public function Detail_Laporan()
     {
     	return $this->belongsTo('App\detail_laporan','laporan');
     }

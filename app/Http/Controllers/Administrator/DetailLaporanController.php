@@ -32,7 +32,7 @@ class DetailLaporanController extends Controller
         $request->session()->flash('warning','Laporan sudah selesai!');
         return back();
        }
-        $detail_laporan=$laporan->detail_laporan()->create(['penduduk'=>$penduduk->id, 'komentar'=>$request['komentar']]);
+        $detail_laporan=$laporan->Detail_laporan()->create(['penduduk'=>$penduduk->id, 'komentar'=>$request['komentar']]);
         if($request->hasfile('foto')){
          $files = $request->file('foto');
          foreach ($files as $step=> $foto) {

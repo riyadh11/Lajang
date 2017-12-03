@@ -69,10 +69,18 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="email" class="col-md-4 control-label">Reputasi</label>
+                            <label for="email" class="col-md-4 control-label">Reputasi Laporan</label>
 
                             <div class="col-md-6">
                                 <input id="Pelapor" type="text" class="form-control" name="lat" value="{{$laporan->detail_laporan->first()->reputation()}}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="col-md-4 control-label">Status</label>
+
+                            <div class="col-md-6">
+                                <input id="Pelapor" type="text" class="form-control" name="lat" value="{{$laporan->Status->nama}}" readonly>
                             </div>
                         </div>
 
@@ -140,12 +148,19 @@
                             <label for="email" class="col-md-4 control-label">{{\App\Penduduk::find($lapor->penduduk)->name}}</label>
 
                             <div class="col-md-6">
-                                <input id="Judul" type="text" class="form-control" name="judul_laporan" value="{{$lapor->komentar}}" readonly>
+                                <input id="Judul-{{$lapor->id}}" type="text" class="form-control" name="judul_laporan" value="{{$lapor->komentar}}" readonly>
                             </div>
                         </div>
                         <center>
+                            @if(Auth::guard('penduduk')->check())
+                            @if(Auth::guard('penduduk')->user()->id == $lapor->penduduk)
+                            <button class="btn btn-info" onclick="modalEdit({{$lapor->id}})">Edit</button>
+                            <a href="/administrator/laporan/perkembangan/hapus/{{$lapor->id}}"><button class="btn btn-danger">Hapus</button></a>
+                            @else
                             <button class="btn btn-info" onclick="kirim_vote(1,{{$lapor->id}})">Suka</button>
                             <button class="btn btn-danger" onclick="kirim_vote(0,{{$lapor->id}})">Tidak suka</button>
+                            @endif
+                            @endif
                         </center>
                         <br>
                         @endif
@@ -205,6 +220,53 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Progress</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" id="edit-progress" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/penduduk/laporan/perkembangan/ubah') }}">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="email" class="col-md-4 control-label">Progress</label>
+
+                            <div class="col-md-6">
+                                <input id="Judul-edit" type="text" class="form-control" name="komentar" value="">
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="id" id="detail_laporan-id" value="">
+                        <input type="hidden" name="id-laporan" id="detail_laporan-id" value="{{$laporan->id}}">
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- End Modal -->
+<script type="text/javascript">
+    function modalEdit($id) {
+        $("#detail_laporan-id").val($id);
+        $("#Judul-edit").val($("#Judul-"+$id).val());
+        $("#myModal").modal('show');
+    }
+</script>
 <script type="text/javascript">
     function kirim_vote(like,id) {
         $("#like").val(like);

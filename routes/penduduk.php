@@ -11,4 +11,6 @@ Route::get('/laporan/ubah/{id}','Penduduk\LaporanController@gupdate')->middlewar
 Route::post('/laporan/ubah/','Penduduk\LaporanController@update')->middleware('auth');
 
 Route::post('/laporan/perkembangan','Penduduk\DetailLaporanController@store')->middleware('auth');
+Route::post('/laporan/perkembangan/ubah','Penduduk\DetailLaporanController@update')->middleware('auth');
+Route::get('/laporan/perkembangan/hapus/{id}','Penduduk\DetailLaporanController@remove')->middleware('auth');
 Route::post('/laporan/vote','Penduduk\VoteController@store')->middleware('auth');

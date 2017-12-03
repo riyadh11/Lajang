@@ -28,7 +28,7 @@ class KecamatanController extends Controller
         $Kecamatan=Kecamatan::withTrashed()->where('nama',$id)->first();
         $kecamatans=Kecamatan::all();
         if($Kecamatan!=null){
-            $kelurahans=$Kecamatan->kelurahan()->withTrashed()->get();
+            $kelurahans=$Kecamatan->Kelurahan()->withTrashed()->get();
             return view('administrator.kelurahan')->with(compact('kelurahans','kecamatans'));
         }else{
             return redirect('/administrator/daerah/kecamatan');
@@ -121,7 +121,7 @@ class KecamatanController extends Controller
     {
         $Kecamatan=Kecamatan::withTrashed()->where('nama',$id)->first();
         if($Kecamatan!=null){
-            $laporan=$Kecamatan->laporan();
+            $laporan=$Kecamatan->Laporan();
             return view('administrator.listlaporan')->with(compact('laporan'));
         }else{
             return redirect('/administrator/daerah/kecamatan');

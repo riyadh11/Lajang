@@ -40,22 +40,22 @@ class Penduduk extends Authenticatable
         $this->notify(new PendudukResetPassword($token));
     }
 
-    public function laporan()
+    public function Laporan()
     {
         return $this->hasMany('App\laporan','pelapor');   
     }
 
-    public function detail_laporan()
+    public function Detail_Laporan()
     {
         return $this->hasMany('App\detail_laporan','penduduk');
     }
 
-    public function vote()
+    public function Vote()
     {
         return $this->hasMany('App\vote','voter');
     }
 
-    public function administrator()
+    public function Administrator()
     {
         return $this->hasOne('App\Administrator','penduduk');
     }
@@ -69,21 +69,21 @@ class Penduduk extends Authenticatable
     {
         $this->status=3;
 
-        foreach($this->laporan->all() as $laporan){
+        foreach($this->Laporan->all() as $laporan){
             $laporan->delete();
         }
 
-        foreach($this->detail_laporan->all() as $detail_laporan){
+        foreach($this->Detail_Laporan->all() as $detail_laporan){
             $detail_laporan->delete();
         }
 
-        foreach($this->vote->all() as $vote){
+        foreach($this->Vote->all() as $vote){
             $vote->delete();
         }
 
-        if($this->administrator){
+        if($this->Administrator){
             $this->status=7;
-            $admin=$this->administrator;
+            $admin=$this->Administrator;
             $admin->delete();
         }
 
@@ -95,33 +95,33 @@ class Penduduk extends Authenticatable
     {
         parent::restore();
         $this->status=1;
-        foreach($this->laporan()->withTrashed()->get() as $laporan){
+        foreach($this->Laporan()->withTrashed()->get() as $laporan){
             $laporan->restore();
         }
 
-        foreach($this->detail_laporan()->withTrashed()->get() as $detail_laporan){
+        foreach($this->Detail_Laporan()->withTrashed()->get() as $detail_laporan){
             $detail_laporan->restore();
         }
 
-        foreach($this->vote()->withTrashed()->get() as $vote){
+        foreach($this->Vote()->withTrashed()->get() as $vote){
             $vote->restore();
         }
 
-        if($this->administrator){
-            $admin=$this->administrator;
+        if($this->Administrator){
+            $admin=$this->Administrator;
             $admin->restore();
             $this->status=5;
         }
         $this->save();
     }
 
-    public function reputation()
+    public function Reputation()
     {
         $plus=0;
         $negative=0;
         $reputation=0;
-        foreach($this->detail_laporan->all() as $laporan){
-            foreach ($laporan->vote->all() as $vote) {
+        foreach($this->Detail_Laporan->all() as $laporan){
+            foreach ($laporan->Vote->all() as $vote) {
                 if($vote->like){
                     $plus++;
                 }else{

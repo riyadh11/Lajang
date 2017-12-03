@@ -13,14 +13,14 @@ class kategori extends Model
         'nama', 'deskripsi',
     ];
 
-    public function laporan()
+    public function Laporan()
     {
     	return $this->hasMany('App\laporan','kategori');
     }
 
     public function delete()
     {
-    	foreach($this->laporan->all() as $laporan){
+    	foreach($this->Laporan->all() as $laporan){
     		$laporan->delete();
     	}
     	parent::delete();
@@ -29,7 +29,7 @@ class kategori extends Model
     public function restore()
     {
     	parent::restore();
-    	foreach($this->laporan()->withTrashed()->get() as $laporan){
+    	foreach($this->Laporan()->withTrashed()->get() as $laporan){
     		$laporan->restore();
     	}
     }

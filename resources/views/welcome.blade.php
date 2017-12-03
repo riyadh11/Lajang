@@ -66,28 +66,18 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    LAJANG
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://www.faathin.com">Website</a>
+                    <a href="https://www.twitter.com/_faathin">Twitter</a>
+                    <a href="https://www.instagram.com/_faathin">Instagram</a>
+                    <a href="https://www.linkedin.com/in/faathin">LinkedIn</a>
+                    <a href="https://github.com/riyah11/lajang">GitHub</a>
+                    <a href="https://www.behance.net/faathin">Behance</a>
                 </div>
             </div>
         </div>

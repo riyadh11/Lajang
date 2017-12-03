@@ -110,7 +110,7 @@ class KategoriController extends Controller
     {
         $kategori=Kategori::withTrashed()->where('nama',$id)->first();
         if($kategori!=null){
-            $laporan=$kategori->laporan()->withTrashed()->get();
+            $laporan=$kategori->Laporan()->withTrashed()->get();
             return view('administrator.listlaporan')->with(compact('laporan'));
         }else{
             return redirect('/administrator/status/laporan');
