@@ -104,7 +104,7 @@ class RegisterController extends Controller
                 DB::beginTransaction();
                 $data = $this->create($input)->toArray();
                 $administrator = Administrator::find($data['id']);
-                Notification::send($administrator, new registerAdministrator($administrator->nama));
+                Notification::send($administrator, new registerAdministrator($administrator->name));
                 DB::Commit();
                 $request->session()->flash('register_success', 'Kami sudah mengirimkan notifikasi pada alamat email anda, silakan periksa email anda!.');
             }catch(Exception $e){
