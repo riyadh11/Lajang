@@ -8,11 +8,13 @@ use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Notification;
 use App\laporan;
 use App\Kategori;
 use App\Penduduk;
 use App\Kelurahan;
 use App\Status_Laporan;
+use App\Notifications\notifyProgress;
 
 class LaporanController extends Controller
 {
@@ -92,6 +94,11 @@ class LaporanController extends Controller
       }
       try{
        DB::beginTransaction();
+       $laporan=Laporan::where('id',$request['id'])->first();
+       if($request['status']!=$laporan->status){
+        $pelapor=$laporan->Penduduk;
+        Notification::send($pelapor, new notifyProgress($pelapor->name,$laporan->judul_laporan,"Laporan anda ".\App\Status_Laporan::find($request['status'])->nama." oleh Administrator LAJANG"));
+       }
        $laporan=Laporan::where('id',$request['id'])->update(['judul_laporan'=>$request['judul_laporan'], 'lat'=>$request['lat'], 'long'=>$request['long'],'alamat'=>$locate['alamat'], 'kategori'=>$request['kategori'], 'kelurahan'=>$kelurahan->id, 'status' => $request['status']]);
        $detail=laporan::find($request['id'])->detail_laporan->first();
        $detail->komentar=$request['deskripsi'];
@@ -125,6 +132,8 @@ class LaporanController extends Controller
           if($laporan->status==1){
             $laporan->status=2;
             $laporan->save();
+            $pelapor=$laporan->Penduduk;
+            Notification::send($pelapor, new notifyProgress($pelapor->name,$laporan->judul_laporan,"Laporan anda tengah ditangani oleh Administrator LAJANG"));
           }
          return view('administrator.lihatlaporan')->with(compact('laporan'));
         }

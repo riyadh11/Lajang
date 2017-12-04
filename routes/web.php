@@ -31,6 +31,7 @@ Route::group(['prefix' => 'penduduk'], function () {
   Route::post('/password/reset', 'PendudukAuth\ResetPasswordController@reset')->name('password.email');
   Route::get('/password/reset', 'PendudukAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'PendudukAuth\ResetPasswordController@showResetForm');
+  Route::get('/confirmation/{token}', 'PendudukAuth\RegisterController@confirmation')->name('confirmation');
 });
 
 

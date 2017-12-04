@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 02 Des 2017 pada 10.46
--- Versi Server: 10.1.21-MariaDB
--- PHP Version: 7.1.1
+-- Generation Time: 04 Des 2017 pada 14.23
+-- Versi Server: 10.1.28-MariaDB
+-- PHP Version: 7.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -43,8 +45,11 @@ CREATE TABLE `administrators` (
 --
 
 INSERT INTO `administrators` (`id`, `name`, `email`, `password`, `penduduk`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Moersali', 'joko@anwar.com', '$2y$10$kaxIalJdj94FOkT1Zfq6ie6bh0xwynKLpoth/1le/ZVD1rpiOftam', 4, 'oRwMlbAc1ZdOFxay8uQmnmTcEeiwumrupeNdR5xs6R4CXAratZKgepbkviWG', '2017-11-27 01:33:24', '2017-12-01 07:27:08', NULL),
-(3, 'Robert', 'joako@anwar.com', '00000', 5, NULL, NULL, '2017-11-30 05:37:13', '2017-11-30 05:37:13');
+(1, 'Moersali', 'joko@anwar.com', '$2y$10$kaxIalJdj94FOkT1Zfq6ie6bh0xwynKLpoth/1le/ZVD1rpiOftam', 4, 'PgCachpDqOXfGuBmqMM9XJ1NUFeME16yLrevRoeXU5zhItWhB3gC8iYRF8Vw', '2017-11-27 01:33:24', '2017-12-02 19:47:21', '2017-12-02 19:47:21'),
+(3, 'Robert', 'joako@anwar.com', '00000', 5, NULL, NULL, '2017-11-30 05:37:13', '2017-11-30 05:37:13'),
+(4, 'Robert', 'root@me.com', '$2y$10$TOBnq0m..YHMGiXsoORWbuVetmoJBj97G9r7/Rvw6mfwcgxRUgdo6', 6, NULL, '2017-12-02 19:46:32', '2017-12-02 19:46:32', NULL),
+(5, 'riyadh', 'joko8joki@gmail.com', '$2y$10$OEW4hUtG54CpPs4vjX6kGOuLlkX.xhN1ta8AbSApCLhvREKSoilVm', 8, 'vSgkzaYubyMJvZ5xSNFOJVAYPvNPRkbHEHNFyneUWb32okDsF51Mk1R9yofR', '2017-12-04 05:55:09', '2017-12-04 05:55:09', NULL),
+(7, 'joko', 'riyadh11@live.com', '$2y$10$ZgcZrj.6N4GUj.OD3KtlbemuQc9LSpzXkSMwyI95g/2KPpy5NRCq2', 12, NULL, '2017-12-04 06:16:29', '2017-12-04 06:16:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -57,6 +62,14 @@ CREATE TABLE `administrator_password_resets` (
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `administrator_password_resets`
+--
+
+INSERT INTO `administrator_password_resets` (`email`, `token`, `created_at`) VALUES
+('joko@anwar.com', '$2y$10$OkC4dBQsvTqq2KkWlTmIcOO9xAiWMDMKfg6hbpLwwRRViLKXUEo6e', '2017-12-02 19:46:01'),
+('root@me.com', '$2y$10$ERDZ50lbWU/S6Gql31pKOOtrSqbmu/qTNIetdfb59ZSpI6ys2haSq', '2017-12-04 05:33:19');
 
 -- --------------------------------------------------------
 
@@ -81,10 +94,10 @@ CREATE TABLE `biaya_perbaikans` (
 --
 
 INSERT INTO `biaya_perbaikans` (`id`, `nama`, `deskripsi`, `unit`, `harga`, `laporan`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(2, 'Marka Jalan', 'Tidak ada', 1, 1000, 11, '2017-12-01 01:33:59', '2017-12-01 07:29:39', NULL),
-(3, 'Nama1', 'Desc1', 1, 1, 12, '2017-12-01 07:02:05', '2017-12-01 07:28:32', NULL),
-(4, 'Nama2', 'Desc2', 2, 2, 12, '2017-12-01 07:02:05', '2017-12-01 07:28:32', NULL),
-(5, 'Nama3', 'Desc3', 3, 3, 12, '2017-12-01 07:02:05', '2017-12-01 07:28:32', NULL);
+(2, 'Marka Jalan', 'Tidak ada', 1, 1000, 11, '2017-12-01 01:33:59', '2017-12-02 19:47:20', '2017-12-02 19:47:20'),
+(3, 'Nama1', 'Desc1', 1, 1, 12, '2017-12-01 07:02:05', '2017-12-02 19:47:20', '2017-12-02 19:47:20'),
+(4, 'Nama2', 'Desc2', 2, 2, 12, '2017-12-01 07:02:05', '2017-12-02 19:47:21', '2017-12-02 19:47:21'),
+(5, 'Nama3', 'Desc3', 3, 3, 12, '2017-12-01 07:02:05', '2017-12-02 19:47:21', '2017-12-02 19:47:21');
 
 -- --------------------------------------------------------
 
@@ -107,18 +120,22 @@ CREATE TABLE `detail_laporans` (
 --
 
 INSERT INTO `detail_laporans` (`id`, `laporan`, `penduduk`, `komentar`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(30, 33, 1, 'Rusak berat menyebabkan kecelakaan', '2017-11-17 05:30:16', '2017-12-01 07:29:39', NULL),
-(31, 33, 1, 'Progress Palalu!', '2017-11-18 21:12:53', '2017-12-01 07:29:39', NULL),
-(32, 33, 1, 'Tambah Progress lagi', '2017-11-18 21:13:33', '2017-12-01 07:29:39', NULL),
-(33, 33, 1, 'Lelel', '2017-11-18 21:48:52', '2017-12-01 07:29:39', NULL),
-(34, 33, 1, 'Entut', '2017-11-18 21:48:56', '2017-12-01 07:29:39', NULL),
-(35, 33, 1, 'hm', '2017-11-18 21:49:55', '2017-12-01 07:29:39', NULL),
-(36, 33, 1, 'kkk', '2017-11-27 03:07:49', '2017-12-01 07:29:39', NULL),
-(37, 33, 4, 'Masuk Angin!', '2017-11-27 03:09:24', '2017-12-01 07:29:39', NULL),
-(38, 34, 1, 'Macet 21 KM', '2017-11-27 04:45:33', '2017-12-01 07:29:39', NULL),
-(39, 35, 1, 'Kecelakaan tunggal', '2017-11-30 00:54:37', '2017-12-01 07:29:39', NULL),
-(40, 35, 4, 'w', '2017-12-01 06:36:39', '2017-12-01 07:29:39', NULL),
-(41, 35, 4, 'aaa', '2017-12-01 06:37:57', '2017-12-01 07:29:39', NULL);
+(30, 33, 1, 'Rusak berat menyebabkan kecelakaan', '2017-11-17 05:30:16', '2017-12-02 19:47:23', NULL),
+(31, 33, 1, 'Progress Palalu!', '2017-11-18 21:12:53', '2017-12-02 19:47:23', NULL),
+(32, 33, 1, 'Tambah Progress lagi', '2017-11-18 21:13:33', '2017-12-02 19:47:23', NULL),
+(33, 33, 1, 'Lelel', '2017-11-18 21:48:52', '2017-12-02 19:47:23', NULL),
+(34, 33, 1, 'Entut', '2017-11-18 21:48:56', '2017-12-02 19:47:23', NULL),
+(35, 33, 1, 'hm', '2017-11-18 21:49:55', '2017-12-02 19:47:23', NULL),
+(36, 33, 1, 'kkk', '2017-11-27 03:07:49', '2017-12-02 19:47:23', NULL),
+(37, 33, 4, 'Masuk Angin!', '2017-11-27 03:09:24', '2017-12-02 19:47:23', NULL),
+(38, 34, 1, 'Macet 21 KM', '2017-11-27 04:45:33', '2017-12-02 19:47:23', NULL),
+(39, 35, 1, 'Kecelakaan tunggal', '2017-11-30 00:54:37', '2017-12-02 19:47:23', NULL),
+(40, 35, 4, 'w', '2017-12-01 06:36:39', '2017-12-02 19:47:23', NULL),
+(41, 35, 4, 'aaa', '2017-12-01 06:37:57', '2017-12-02 19:47:23', NULL),
+(42, 36, 7, 'Macet 100 Km', '2017-12-02 19:51:13', '2017-12-02 19:51:13', NULL),
+(43, 36, 7, '222', '2017-12-02 20:02:31', '2017-12-02 20:15:35', '2017-12-02 20:15:35'),
+(44, 36, 7, 'Percobaan!!!!', '2017-12-02 20:16:06', '2017-12-02 20:16:46', NULL),
+(45, 35, 7, 'aaaa', '2017-12-02 20:24:27', '2017-12-02 20:26:38', '2017-12-02 20:26:38');
 
 -- --------------------------------------------------------
 
@@ -128,7 +145,7 @@ INSERT INTO `detail_laporans` (`id`, `laporan`, `penduduk`, `komentar`, `created
 
 CREATE TABLE `foto_laporans` (
   `id` int(10) UNSIGNED NOT NULL,
-  `laporan` int(11) NOT NULL,
+  `laporan` int(10) UNSIGNED NOT NULL,
   `url_gambar` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -148,12 +165,17 @@ INSERT INTO `foto_laporans` (`id`, `laporan`, `url_gambar`, `created_at`, `updat
 (16, 34, 'laporan_182be0c5cdcd5072bb1864cdee4d3d6e_LaBoran/progress-e369853df766fa44e1ed0ff613f563bd-15110669360.png', '2017-11-18 21:48:56', '2017-12-01 07:28:31', NULL),
 (17, 35, 'laporan_182be0c5cdcd5072bb1864cdee4d3d6e_LaBoran/progress-1c383cd30b7c298ab50293adfecb7b18-15110669950.png', '2017-11-18 21:49:55', '2017-12-01 07:28:31', NULL),
 (18, 36, 'laporan_182be0c5cdcd5072bb1864cdee4d3d6e_LaBoran!/progress-19ca14e7ea6328a42e0eb13d585e4c22-15117772690.png', '2017-11-27 03:07:49', '2017-12-01 07:28:32', NULL),
-(19, 37, 'laporan_182be0c5cdcd5072bb1864cdee4d3d6e_LaBoran!/progress-a5bfc9e07964f8dddeb95fc584cd965d-15117773640.png', '2017-11-27 03:09:24', '2017-12-01 07:28:32', NULL),
+(19, 37, 'laporan_182be0c5cdcd5072bb1864cdee4d3d6e_LaBoran!/progress-a5bfc9e07964f8dddeb95fc584cd965d-15117773640.png', '2017-11-27 03:09:24', '2017-12-02 19:47:23', NULL),
 (20, 38, 'laporan_e369853df766fa44e1ed0ff613f563bd_Macet dijalan Soekarno Hatta/progress-a5771bce93e200c36f7cd9dfd0e5deaa-15117831330.png', '2017-11-27 04:45:33', '2017-11-29 23:45:39', NULL),
 (21, 39, 'laporan_1c383cd30b7c298ab50293adfecb7b18_Kecelakaan tunggal/progress-d67d8ab4f4c10bf22aa353e27879133c-15120284780.png', '2017-11-30 00:54:38', '2017-12-01 07:29:39', NULL),
 (22, 39, 'laporan_1c383cd30b7c298ab50293adfecb7b18_Kecelakaan tunggal/progress-d67d8ab4f4c10bf22aa353e27879133c-15120284781.png', '2017-11-30 00:54:38', '2017-12-01 07:29:39', NULL),
-(23, 40, 'laporan_1c383cd30b7c298ab50293adfecb7b18_Kecelakaan tunggal/progress-d645920e395fedad7bbbed0eca3fe2e0-15121353990.png', '2017-12-01 06:36:39', '2017-12-01 07:29:39', NULL),
-(24, 41, 'laporan_1c383cd30b7c298ab50293adfecb7b18_Kecelakaan tunggal/progress-3416a75f4cea9109507cacd8e2f2aefc-15121354770.png', '2017-12-01 06:37:57', '2017-12-01 07:29:39', NULL);
+(23, 40, 'laporan_1c383cd30b7c298ab50293adfecb7b18_Kecelakaan tunggal/progress-d645920e395fedad7bbbed0eca3fe2e0-15121353990.png', '2017-12-01 06:36:39', '2017-12-02 19:47:23', NULL),
+(24, 41, 'laporan_1c383cd30b7c298ab50293adfecb7b18_Kecelakaan tunggal/progress-3416a75f4cea9109507cacd8e2f2aefc-15121354770.png', '2017-12-01 06:37:57', '2017-12-02 19:47:23', NULL),
+(25, 42, 'laporan_19ca14e7ea6328a42e0eb13d585e4c22_Macet dijalan Soekarno Hatta 100 km/progress-a1d0c6e83f027327d8461063f4ac58a6-15122694730.png', '2017-12-02 19:51:13', '2017-12-02 19:51:13', NULL),
+(26, 42, 'laporan_19ca14e7ea6328a42e0eb13d585e4c22_Macet dijalan Soekarno Hatta 100 km/progress-a1d0c6e83f027327d8461063f4ac58a6-15122694731.png', '2017-12-02 19:51:13', '2017-12-02 19:51:13', NULL),
+(27, 43, 'laporan_19ca14e7ea6328a42e0eb13d585e4c22_Macet dijalan Soekarno Hatta 100 km/progress-17e62166fc8586dfa4d1bc0e1742c08b-15122701510.png', '2017-12-02 20:02:31', '2017-12-02 20:02:31', NULL),
+(28, 44, 'laporan_19ca14e7ea6328a42e0eb13d585e4c22_Macet dijalan Soekarno Hatta 100 km/progress-f7177163c833dff4b38fc8d2872f1ec6-15122709660.png', '2017-12-02 20:16:06', '2017-12-02 20:16:06', NULL),
+(29, 45, 'laporan_1c383cd30b7c298ab50293adfecb7b18_Kecelakaan tunggal/progress-6c8349cc7260ae62e3b1396831a8398f-15122714670.png', '2017-12-02 20:24:27', '2017-12-02 20:24:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -255,7 +277,8 @@ CREATE TABLE `laporans` (
 INSERT INTO `laporans` (`id`, `judul_laporan`, `pelapor`, `lat`, `long`, `alamat`, `kelurahan`, `kategori`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (33, 'Jalan Rusak Berat', 1, '-7.969594', '112.636209', 'Jl. Cokroaminoto No.34, Klojen, Kota Malang, Jawa Timur 65111, Indonesia', 1, 3, 4, '2017-11-17 05:30:16', '2017-12-01 07:29:39', NULL),
 (34, 'Macet dijalan Soekarno Hatta', 1, '-7.941763', '112.622315', 'Ruko Griya Shanta, Jl. Soekarno Hatta No.57, Jatimulyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 65142, Indonesia', 1, 1, 2, '2017-11-27 04:45:33', '2017-12-01 07:29:39', NULL),
-(35, 'Kecelakaan tunggal', 1, '-7.969594', '112.636209', 'Jl. Cokroaminoto No.34, Klojen, Kota Malang, Jawa Timur 65111, Indonesia', 1, 3, 4, '2017-11-30 00:54:37', '2017-12-01 07:29:39', NULL);
+(35, 'Kecelakaan tunggal', 1, '-7.969594', '112.636209', 'Jl. Cokroaminoto No.34, Klojen, Kota Malang, Jawa Timur 65111, Indonesia', 1, 3, 4, '2017-11-30 00:54:37', '2017-12-01 07:29:39', NULL),
+(36, 'Macet dijalan Soekarno Hatta 100 km', 7, '-7.969594', '112.636209', 'Jl. Cokroaminoto No.34, Klojen, Kota Malang, Jawa Timur 65111, Indonesia', 1, 1, 2, '2017-12-02 19:51:13', '2017-12-02 20:15:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -319,6 +342,7 @@ CREATE TABLE `penduduks` (
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` int(10) UNSIGNED NOT NULL DEFAULT '1',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `activation_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -328,11 +352,17 @@ CREATE TABLE `penduduks` (
 -- Dumping data untuk tabel `penduduks`
 --
 
-INSERT INTO `penduduks` (`id`, `name`, `nik`, `email`, `password`, `status`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Ahmad Riyadh Al Faathin', '12345678901', 'ahmad.riyadh72@gmail.com', '$2y$10$9k1No5FTjQnhfxIl3oBReOCy4tdR7L5W1ax6y.u6V9Yn.H8woBA1u', 2, 'pEpFuQj1EVwFPyM54qFaD1sbbit80ZY8DceujHM6kE0OEdIIi6YK5jJr7P4s', '2017-11-16 23:06:08', '2017-12-01 07:26:20', NULL),
-(2, 'Nama', '999999', 'r@m.com', '$2y$10$z5hvIjoEU1og7O0N.GlaC.QRTYNU/unUCtIL7X4556YmJTg3qs12q', 2, 'eqXu35KbE4BFsfZgahwGJpXPZl3jo3CCXlrm3O8LFXDeUwDTnfuZYADJSYL3', '2017-11-17 01:16:48', '2017-12-01 07:26:20', NULL),
-(4, 'Moersali', '1191919191', 'joko@anwar.com', '$2y$10$V.B7b8O9eH0aUpVdgKemR.EWFLx2hadbVvIBcKslYET.MgCV5J5VG', 7, NULL, '2017-11-27 01:33:24', '2017-12-01 07:27:08', NULL),
-(5, 'Robert', '999911199', '999911199.admin.joako@anwar.com', '$2y$10$9MaHv7veH9r1xiuqZ5Z5deF0cC8CWs2C8NPMKwkPdDmS6.vQJp.Hq', 3, NULL, '2017-11-27 02:29:38', '2017-12-01 07:27:02', '2017-12-01 07:27:02');
+INSERT INTO `penduduks` (`id`, `name`, `nik`, `email`, `password`, `status`, `remember_token`, `activation_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Ahmad Riyadh Al Faathin', '12345678901', 'ahmad.riyadh72@gmail.com', '$2y$10$9k1No5FTjQnhfxIl3oBReOCy4tdR7L5W1ax6y.u6V9Yn.H8woBA1u', 2, 'pEpFuQj1EVwFPyM54qFaD1sbbit80ZY8DceujHM6kE0OEdIIi6YK5jJr7P4s', '', '2017-11-16 23:06:08', '2017-12-02 19:47:23', NULL),
+(2, 'Nama', '999999', 'r@m.com', '$2y$10$z5hvIjoEU1og7O0N.GlaC.QRTYNU/unUCtIL7X4556YmJTg3qs12q', 2, 'eqXu35KbE4BFsfZgahwGJpXPZl3jo3CCXlrm3O8LFXDeUwDTnfuZYADJSYL3', '', '2017-11-17 01:16:48', '2017-12-02 19:47:23', NULL),
+(4, 'Moersali', '1191919191', 'joko@anwar.com', '$2y$10$V.B7b8O9eH0aUpVdgKemR.EWFLx2hadbVvIBcKslYET.MgCV5J5VG', 1, NULL, '', '2017-11-27 01:33:24', '2017-12-02 19:47:23', NULL),
+(5, 'Robert', '999911199', '999911199.admin.joako@anwar.com', '$2y$10$9MaHv7veH9r1xiuqZ5Z5deF0cC8CWs2C8NPMKwkPdDmS6.vQJp.Hq', 3, NULL, '', '2017-11-27 02:29:38', '2017-12-02 19:47:23', NULL),
+(6, 'Robert', '1234567890', '1234567890.admin.root@me.com', '$2y$10$qnQx5e9cXmkW3HU7.onqFeeTW7wTDlKhCVUwBZoStSKWdBebWMpH.', 5, NULL, '', '2017-12-02 19:46:31', '2017-12-02 19:47:23', NULL),
+(7, 'MemeLord', '999999999999', 'meme@lord.com', '$2y$10$iTKnl0bTjPNN3qGyuktiPO2fHamIhqeybe8PxN4u7l3YQ0zQE769O', 1, NULL, '', '2017-12-02 19:49:27', '2017-12-02 19:49:27', NULL),
+(8, 'riyadh', '12345', '12345.admin.joko8joki@gmail.com', '$2y$10$y4VR5X0f.ZD848loqD3fd.u6vVWDdmru67hkR0v1cIKYBL1G9v9y2', 5, NULL, NULL, '2017-12-04 05:55:08', '2017-12-04 05:55:08', NULL),
+(10, 'joko', '123456789011', 'joko8joki@gmail.com', '$2y$10$A1qyo9wXii75PWUM5cXRbOkY2KlQ9gtwDK5HSrmUyXG8vYVe1.8.6', 2, NULL, '', '2017-12-04 05:57:46', '2017-12-04 06:02:15', NULL),
+(11, 'Ahmad Riyadh Al Faathin', '9292929292', '9292929292.admin.riyadh11@live.com', '$2y$10$cjk5droAMm0DK1ZsKVpn0OO6Uw5mxxIzI3F0muUZhS9fRhOt23U3C', 5, NULL, NULL, '2017-12-04 06:11:03', '2017-12-04 06:11:03', NULL),
+(12, 'joko', '99999', '99999.admin.riyadh11@live.com', '$2y$10$f1t9rcJVdsLo350zcxMQKOlkrI78.ZUFUSz9xQ6YxJL5Qy.4o8dxK', 5, NULL, NULL, '2017-12-04 06:16:29', '2017-12-04 06:16:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -369,8 +399,8 @@ CREATE TABLE `pertanggung_jawabans` (
 --
 
 INSERT INTO `pertanggung_jawabans` (`id`, `laporan`, `keterangan`, `kendala`, `solusi`, `administrator`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(11, 35, 'Sudah selesai', 'Lancar bos', 'Lancar semua', 1, '2017-12-01 01:33:59', '2017-12-01 07:29:39', NULL),
-(12, 33, 'Percobaan', 'Percobaan Kendala', 'Percobaan Solusi', 1, '2017-12-01 07:02:05', '2017-12-01 07:29:39', NULL);
+(11, 35, 'Sudah selesai', 'Lancar bos', 'Lancar semua', 1, '2017-12-01 01:33:59', '2017-12-02 19:47:20', '2017-12-02 19:47:20'),
+(12, 33, 'Percobaan', 'Percobaan Kendala', 'Percobaan Solusi', 1, '2017-12-01 07:02:05', '2017-12-02 19:47:21', '2017-12-02 19:47:21');
 
 -- --------------------------------------------------------
 
@@ -469,7 +499,12 @@ INSERT INTO `votes` (`id`, `laporan`, `voter`, `like`, `created_at`, `updated_at
 (2, 31, 1, 1, '2017-11-20 21:08:55', '2017-12-01 07:28:31', NULL),
 (3, 34, 1, 1, '2017-11-20 21:12:41', '2017-12-01 07:28:31', NULL),
 (4, 32, 1, 0, '2017-11-20 21:19:08', '2017-12-01 07:28:31', NULL),
-(5, 35, 1, 0, '2017-11-20 21:19:18', '2017-12-01 07:28:31', NULL);
+(5, 35, 1, 0, '2017-11-20 21:19:18', '2017-12-01 07:28:31', NULL),
+(6, 42, 7, 1, '2017-12-02 19:55:10', '2017-12-02 20:15:47', NULL),
+(7, 39, 7, 1, '2017-12-02 20:23:24', '2017-12-02 20:24:16', NULL),
+(8, 40, 7, 1, '2017-12-02 20:23:32', '2017-12-02 20:23:32', NULL),
+(9, 41, 7, 1, '2017-12-02 20:23:35', '2017-12-02 20:23:35', NULL),
+(10, 37, 7, 1, '2017-12-02 20:34:18', '2017-12-02 20:34:18', NULL);
 
 --
 -- Indexes for dumped tables
@@ -480,7 +515,8 @@ INSERT INTO `votes` (`id`, `laporan`, `voter`, `like`, `created_at`, `updated_at
 --
 ALTER TABLE `administrators`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `administrators_email_unique` (`email`);
+  ADD UNIQUE KEY `administrators_email_unique` (`email`),
+  ADD KEY `administrator__ibfk_penduduk` (`penduduk`);
 
 --
 -- Indexes for table `administrator_password_resets`
@@ -493,19 +529,23 @@ ALTER TABLE `administrator_password_resets`
 -- Indexes for table `biaya_perbaikans`
 --
 ALTER TABLE `biaya_perbaikans`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `biaya__ibfk__lpj` (`laporan`);
 
 --
 -- Indexes for table `detail_laporans`
 --
 ALTER TABLE `detail_laporans`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `detail__ibfk__laporan` (`laporan`),
+  ADD KEY `detail__ibfk__penduduk` (`penduduk`);
 
 --
 -- Indexes for table `foto_laporans`
 --
 ALTER TABLE `foto_laporans`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `foto__ibfk__detail` (`laporan`);
 
 --
 -- Indexes for table `kategoris`
@@ -523,13 +563,18 @@ ALTER TABLE `kecamatans`
 -- Indexes for table `kelurahans`
 --
 ALTER TABLE `kelurahans`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `kelurahan__ibfk__kecamatan` (`kecamatan`);
 
 --
 -- Indexes for table `laporans`
 --
 ALTER TABLE `laporans`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `laporan__ibfk__penduduk` (`pelapor`),
+  ADD KEY `laporan__ibfk__kategori` (`kategori`),
+  ADD KEY `laporan__ibfk__status` (`status`),
+  ADD KEY `laporan__ibfk__kelurahan` (`kelurahan`);
 
 --
 -- Indexes for table `migrations`
@@ -548,7 +593,8 @@ ALTER TABLE `password_resets`
 --
 ALTER TABLE `penduduks`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `penduduks_email_unique` (`email`);
+  ADD UNIQUE KEY `penduduks_email_unique` (`email`),
+  ADD KEY `penduduk__ibfk__status` (`status`);
 
 --
 -- Indexes for table `penduduk_password_resets`
@@ -561,7 +607,8 @@ ALTER TABLE `penduduk_password_resets`
 -- Indexes for table `pertanggung_jawabans`
 --
 ALTER TABLE `pertanggung_jawabans`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `lpj__ibfk__laporan` (`laporan`);
 
 --
 -- Indexes for table `status_laporans`
@@ -586,7 +633,9 @@ ALTER TABLE `users`
 -- Indexes for table `votes`
 --
 ALTER TABLE `votes`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `votes__ibfk__detail` (`laporan`),
+  ADD KEY `votes__ibfk__penduduk` (`voter`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -596,77 +645,156 @@ ALTER TABLE `votes`
 -- AUTO_INCREMENT for table `administrators`
 --
 ALTER TABLE `administrators`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `biaya_perbaikans`
 --
 ALTER TABLE `biaya_perbaikans`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `detail_laporans`
 --
 ALTER TABLE `detail_laporans`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
 --
 -- AUTO_INCREMENT for table `foto_laporans`
 --
 ALTER TABLE `foto_laporans`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
 --
 -- AUTO_INCREMENT for table `kategoris`
 --
 ALTER TABLE `kategoris`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `kecamatans`
 --
 ALTER TABLE `kecamatans`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `kelurahans`
 --
 ALTER TABLE `kelurahans`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `laporans`
 --
 ALTER TABLE `laporans`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
 --
 -- AUTO_INCREMENT for table `penduduks`
 --
 ALTER TABLE `penduduks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `pertanggung_jawabans`
 --
 ALTER TABLE `pertanggung_jawabans`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `status_laporans`
 --
 ALTER TABLE `status_laporans`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `status_penduduks`
 --
 ALTER TABLE `status_penduduks`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `administrators`
+--
+ALTER TABLE `administrators`
+  ADD CONSTRAINT `administrator__ibfk_penduduk` FOREIGN KEY (`penduduk`) REFERENCES `penduduks` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `biaya_perbaikans`
+--
+ALTER TABLE `biaya_perbaikans`
+  ADD CONSTRAINT `biaya__ibfk__lpj` FOREIGN KEY (`laporan`) REFERENCES `pertanggung_jawabans` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `detail_laporans`
+--
+ALTER TABLE `detail_laporans`
+  ADD CONSTRAINT `detail__ibfk__laporan` FOREIGN KEY (`laporan`) REFERENCES `laporans` (`id`),
+  ADD CONSTRAINT `detail__ibfk__penduduk` FOREIGN KEY (`penduduk`) REFERENCES `penduduks` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `foto_laporans`
+--
+ALTER TABLE `foto_laporans`
+  ADD CONSTRAINT `foto__ibfk__detail` FOREIGN KEY (`laporan`) REFERENCES `detail_laporans` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `kelurahans`
+--
+ALTER TABLE `kelurahans`
+  ADD CONSTRAINT `kelurahan__ibfk__kecamatan` FOREIGN KEY (`kecamatan`) REFERENCES `kecamatans` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `laporans`
+--
+ALTER TABLE `laporans`
+  ADD CONSTRAINT `laporan__ibfk__kategori` FOREIGN KEY (`kategori`) REFERENCES `kategoris` (`id`),
+  ADD CONSTRAINT `laporan__ibfk__kelurahan` FOREIGN KEY (`kelurahan`) REFERENCES `kelurahans` (`id`),
+  ADD CONSTRAINT `laporan__ibfk__penduduk` FOREIGN KEY (`pelapor`) REFERENCES `penduduks` (`id`),
+  ADD CONSTRAINT `laporan__ibfk__status` FOREIGN KEY (`status`) REFERENCES `status_laporans` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `penduduks`
+--
+ALTER TABLE `penduduks`
+  ADD CONSTRAINT `penduduk__ibfk__status` FOREIGN KEY (`status`) REFERENCES `status_penduduks` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `pertanggung_jawabans`
+--
+ALTER TABLE `pertanggung_jawabans`
+  ADD CONSTRAINT `lpj__ibfk__laporan` FOREIGN KEY (`laporan`) REFERENCES `laporans` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `votes`
+--
+ALTER TABLE `votes`
+  ADD CONSTRAINT `votes__ibfk__detail` FOREIGN KEY (`laporan`) REFERENCES `detail_laporans` (`id`),
+  ADD CONSTRAINT `votes__ibfk__penduduk` FOREIGN KEY (`voter`) REFERENCES `penduduks` (`id`);
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

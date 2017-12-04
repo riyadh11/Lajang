@@ -8,6 +8,10 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Notifications\registerAdministrator;
 
 class RegisterController extends Controller
 {
@@ -84,6 +88,32 @@ class RegisterController extends Controller
             'status' => '5',
             'password' => bcrypt(rand(1111111111,999999999).$data['name'].$data['nik'].rand(00000000,99999999)),
         ]);
+    }
+
+
+    protected function register(Request $request){
+        $input = $request->all();
+        $validator = $this->validator($input);
+        if ($validator->fails())
+        {
+            $request->session()->flash('register_failed','Registrasi gagal!');
+            return redirect(url('/administrator/register'));
+        }
+        else{
+            try{
+                DB::beginTransaction();
+                $data = $this->create($input)->toArray();
+                $administrator = Administrator::find($data['id']);
+                Notification::send($administrator, new registerAdministrator($administrator->nama));
+                DB::Commit();
+                $request->session()->flash('register_success', 'Kami sudah mengirimkan notifikasi pada alamat email anda, silakan periksa email anda!.');
+            }catch(Exception $e){
+                DB::Rollback();
+                $request->session()->flash('register_failed', 'Registrasi gagal!');
+            }
+          
+          return redirect(url('/administrator/login'));
+        }
     }
 
     /**

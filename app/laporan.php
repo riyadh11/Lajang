@@ -51,7 +51,9 @@ class laporan extends Model
         }
 
         $p=$this->PertanggungJawaban()->withTrashed()->first();
-        $p->delete();
+        if($p!=null){
+            $p->delete();
+        }
         parent::delete();
     }
 
@@ -63,7 +65,9 @@ class laporan extends Model
         }
 
         $p=$this->PertanggungJawaban()->withTrashed()->first();
-        $p->restore();
+        if($p!=null){
+            $p->restore();
+        }
     }
 
 }

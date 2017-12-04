@@ -8,9 +8,11 @@ use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Notification;
 use App\laporan;
 use App\Detail_laporan;
 use App\Penduduk;
+use App\Notifications\notifyProgress;
 
 class DetailLaporanController extends Controller
 {
@@ -48,6 +50,8 @@ class DetailLaporanController extends Controller
           $detail_laporan->foto_laporan()->create(['url_gambar'=>$nama_folder.$nama_file]);
          }
         }
+        $pelapor=$laporan->Penduduk;
+       Notification::send($pelapor, new notifyProgress($pelapor->name,$laporan->judul_laporan,$detail_laporan->komentar));
        DB::commit();
       }catch(Exception $e){
        DB::rollback();

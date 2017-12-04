@@ -17,7 +17,7 @@ class Penduduk extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','nik','status'
+        'name', 'email', 'password','nik','status','activation_token'
     ];
 
     /**
