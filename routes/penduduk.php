@@ -4,6 +4,9 @@ Route::get('/',"Penduduk\HomeController@index");
 Route::get('/home',"Penduduk\HomeController@index");
 Route::get('/laporan','Penduduk\LaporanController@list');
 
+Route::get('/profil',"Penduduk\PendudukController@index");
+Route::post('/profil/ubah',"Penduduk\PendudukController@update");
+
 Route::get('/laporan/buat','Penduduk\LaporanController@gstore');
 Route::post('/laporan/buat','Penduduk\LaporanController@store');
 

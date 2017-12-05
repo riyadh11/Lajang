@@ -70,6 +70,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'data-penduduk' => [
+            'driver' => 'local',
+            'root' => public_path('storage/data-penduduk'),
+            'url' => public_path('storage/data-penduduk'),
+            'visibility' => 'public',
+        ],
+
     ],
 
 ];
