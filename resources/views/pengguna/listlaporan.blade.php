@@ -49,6 +49,7 @@
                             <label for="cari" class="col-md-4 control-label">Cari Laporan</label>
                             <div class="col-md-6">
                                 <input id="cari" type="text" class="form-control" name="param" value="">
+                                <button class="btn btn-info" onclick="cari()">Cari</button>
                             </div>
                         </div>
                 </div>
@@ -57,16 +58,12 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(function() {
-            $('#cari').keypress(function(e) {
-                if(e.which=13){
-                    var Input = this.value;
-                    if(Input!=""){
-                        window.location.href = "/laporan/cari/"+Input+"/page/1";
-                    }
-                }
-            });
-    });
+    function cari() {
+        Input=$("#cari").val();
+        if(Input!="" && Input!=" "){
+            window.location.href = "/laporan/cari/"+Input+"/page/1";    
+        }
+    }
 </script>
 
 @endsection
