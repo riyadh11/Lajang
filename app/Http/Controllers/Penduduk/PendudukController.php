@@ -16,7 +16,7 @@ class PendudukController extends Controller
     public function index()
     {
       $penduduk=\Auth::guard('penduduk')->user();
-      return view('Penduduk.profile')->with(compact('penduduk'));
+      return view('penduduk.profile')->with(compact('penduduk'));
     }
 
     public function update(Request $request)
