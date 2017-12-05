@@ -17,7 +17,7 @@ class Status_Laporan extends Model
 
     public function Laporan()
     {
-    	return $this->hasMany('App\laporan','status');
+    	return $this->hasMany('App\Laporan','status');
     }
 
     public function delete()
