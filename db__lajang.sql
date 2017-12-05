@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 04 Des 2017 pada 14.23
--- Versi Server: 10.1.28-MariaDB
--- PHP Version: 7.1.10
+-- Generation Time: 05 Des 2017 pada 04.10
+-- Versi Server: 10.1.21-MariaDB
+-- PHP Version: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -341,6 +339,7 @@ CREATE TABLE `penduduks` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` int(10) UNSIGNED NOT NULL DEFAULT '1',
+  `url_foto` varchar(535) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'default_avatar.png',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `activation_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -352,17 +351,17 @@ CREATE TABLE `penduduks` (
 -- Dumping data untuk tabel `penduduks`
 --
 
-INSERT INTO `penduduks` (`id`, `name`, `nik`, `email`, `password`, `status`, `remember_token`, `activation_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Ahmad Riyadh Al Faathin', '12345678901', 'ahmad.riyadh72@gmail.com', '$2y$10$9k1No5FTjQnhfxIl3oBReOCy4tdR7L5W1ax6y.u6V9Yn.H8woBA1u', 2, 'pEpFuQj1EVwFPyM54qFaD1sbbit80ZY8DceujHM6kE0OEdIIi6YK5jJr7P4s', '', '2017-11-16 23:06:08', '2017-12-02 19:47:23', NULL),
-(2, 'Nama', '999999', 'r@m.com', '$2y$10$z5hvIjoEU1og7O0N.GlaC.QRTYNU/unUCtIL7X4556YmJTg3qs12q', 2, 'eqXu35KbE4BFsfZgahwGJpXPZl3jo3CCXlrm3O8LFXDeUwDTnfuZYADJSYL3', '', '2017-11-17 01:16:48', '2017-12-02 19:47:23', NULL),
-(4, 'Moersali', '1191919191', 'joko@anwar.com', '$2y$10$V.B7b8O9eH0aUpVdgKemR.EWFLx2hadbVvIBcKslYET.MgCV5J5VG', 1, NULL, '', '2017-11-27 01:33:24', '2017-12-02 19:47:23', NULL),
-(5, 'Robert', '999911199', '999911199.admin.joako@anwar.com', '$2y$10$9MaHv7veH9r1xiuqZ5Z5deF0cC8CWs2C8NPMKwkPdDmS6.vQJp.Hq', 3, NULL, '', '2017-11-27 02:29:38', '2017-12-02 19:47:23', NULL),
-(6, 'Robert', '1234567890', '1234567890.admin.root@me.com', '$2y$10$qnQx5e9cXmkW3HU7.onqFeeTW7wTDlKhCVUwBZoStSKWdBebWMpH.', 5, NULL, '', '2017-12-02 19:46:31', '2017-12-02 19:47:23', NULL),
-(7, 'MemeLord', '999999999999', 'meme@lord.com', '$2y$10$iTKnl0bTjPNN3qGyuktiPO2fHamIhqeybe8PxN4u7l3YQ0zQE769O', 1, NULL, '', '2017-12-02 19:49:27', '2017-12-02 19:49:27', NULL),
-(8, 'riyadh', '12345', '12345.admin.joko8joki@gmail.com', '$2y$10$y4VR5X0f.ZD848loqD3fd.u6vVWDdmru67hkR0v1cIKYBL1G9v9y2', 5, NULL, NULL, '2017-12-04 05:55:08', '2017-12-04 05:55:08', NULL),
-(10, 'joko', '123456789011', 'joko8joki@gmail.com', '$2y$10$A1qyo9wXii75PWUM5cXRbOkY2KlQ9gtwDK5HSrmUyXG8vYVe1.8.6', 2, NULL, '', '2017-12-04 05:57:46', '2017-12-04 06:02:15', NULL),
-(11, 'Ahmad Riyadh Al Faathin', '9292929292', '9292929292.admin.riyadh11@live.com', '$2y$10$cjk5droAMm0DK1ZsKVpn0OO6Uw5mxxIzI3F0muUZhS9fRhOt23U3C', 5, NULL, NULL, '2017-12-04 06:11:03', '2017-12-04 06:11:03', NULL),
-(12, 'joko', '99999', '99999.admin.riyadh11@live.com', '$2y$10$f1t9rcJVdsLo350zcxMQKOlkrI78.ZUFUSz9xQ6YxJL5Qy.4o8dxK', 5, NULL, NULL, '2017-12-04 06:16:29', '2017-12-04 06:16:29', NULL);
+INSERT INTO `penduduks` (`id`, `name`, `nik`, `email`, `password`, `status`, `url_foto`, `remember_token`, `activation_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Ahmad Riyadh Al Faathin', '12345678901', 'ahmad.riyadh72@gmail.com', '$2y$10$9k1No5FTjQnhfxIl3oBReOCy4tdR7L5W1ax6y.u6V9Yn.H8woBA1u', 2, 'default_avatar.png', 'pEpFuQj1EVwFPyM54qFaD1sbbit80ZY8DceujHM6kE0OEdIIi6YK5jJr7P4s', '', '2017-11-16 23:06:08', '2017-12-04 20:00:52', NULL),
+(2, 'Nama', '999999', 'r@m.com', '$2y$10$z5hvIjoEU1og7O0N.GlaC.QRTYNU/unUCtIL7X4556YmJTg3qs12q', 2, 'default_avatar.png', 'eqXu35KbE4BFsfZgahwGJpXPZl3jo3CCXlrm3O8LFXDeUwDTnfuZYADJSYL3', '', '2017-11-17 01:16:48', '2017-12-02 19:47:23', NULL),
+(4, 'Moersali', '1191919191', 'joko@anwar.com', '$2y$10$V.B7b8O9eH0aUpVdgKemR.EWFLx2hadbVvIBcKslYET.MgCV5J5VG', 1, 'default_avatar.png', NULL, '', '2017-11-27 01:33:24', '2017-12-02 19:47:23', NULL),
+(5, 'Robert', '999911199', '999911199.admin.joako@anwar.com', '$2y$10$9MaHv7veH9r1xiuqZ5Z5deF0cC8CWs2C8NPMKwkPdDmS6.vQJp.Hq', 3, 'default_avatar.png', NULL, '', '2017-11-27 02:29:38', '2017-12-02 19:47:23', NULL),
+(6, 'Robert', '1234567890', '1234567890.admin.root@me.com', '$2y$10$qnQx5e9cXmkW3HU7.onqFeeTW7wTDlKhCVUwBZoStSKWdBebWMpH.', 5, 'default_avatar.png', NULL, '', '2017-12-02 19:46:31', '2017-12-02 19:47:23', NULL),
+(7, 'MemeLord', '999999999999', 'meme@lord.com', '$2y$10$iTKnl0bTjPNN3qGyuktiPO2fHamIhqeybe8PxN4u7l3YQ0zQE769O', 1, 'default_avatar.png', NULL, '', '2017-12-02 19:49:27', '2017-12-02 19:49:27', NULL),
+(8, 'riyadh', '12345', '12345.admin.joko8joki@gmail.com', '$2y$10$y4VR5X0f.ZD848loqD3fd.u6vVWDdmru67hkR0v1cIKYBL1G9v9y2', 5, 'default_avatar.png', NULL, NULL, '2017-12-04 05:55:08', '2017-12-04 05:55:08', NULL),
+(10, 'joko', '123456789011', 'joko8joki@gmail.com', '$2y$10$A1qyo9wXii75PWUM5cXRbOkY2KlQ9gtwDK5HSrmUyXG8vYVe1.8.6', 2, 'default_avatar.png', NULL, '', '2017-12-04 05:57:46', '2017-12-04 06:02:15', NULL),
+(11, 'Ahmad Riyadh Al Faathin', '9292929292', '9292929292.admin.riyadh11@live.com', '$2y$10$cjk5droAMm0DK1ZsKVpn0OO6Uw5mxxIzI3F0muUZhS9fRhOt23U3C', 5, 'default_avatar.png', NULL, NULL, '2017-12-04 06:11:03', '2017-12-04 06:11:03', NULL),
+(12, 'joko', '99999', '99999.admin.riyadh11@live.com', '$2y$10$f1t9rcJVdsLo350zcxMQKOlkrI78.ZUFUSz9xQ6YxJL5Qy.4o8dxK', 5, 'default_avatar.png', NULL, NULL, '2017-12-04 06:16:29', '2017-12-04 06:16:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -646,91 +645,76 @@ ALTER TABLE `votes`
 --
 ALTER TABLE `administrators`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT for table `biaya_perbaikans`
 --
 ALTER TABLE `biaya_perbaikans`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT for table `detail_laporans`
 --
 ALTER TABLE `detail_laporans`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
-
 --
 -- AUTO_INCREMENT for table `foto_laporans`
 --
 ALTER TABLE `foto_laporans`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-
 --
 -- AUTO_INCREMENT for table `kategoris`
 --
 ALTER TABLE `kategoris`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `kecamatans`
 --
 ALTER TABLE `kecamatans`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT for table `kelurahans`
 --
 ALTER TABLE `kelurahans`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `laporans`
 --
 ALTER TABLE `laporans`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
-
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
 --
 -- AUTO_INCREMENT for table `penduduks`
 --
 ALTER TABLE `penduduks`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT for table `pertanggung_jawabans`
 --
 ALTER TABLE `pertanggung_jawabans`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT for table `status_laporans`
 --
 ALTER TABLE `status_laporans`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT for table `status_penduduks`
 --
 ALTER TABLE `status_penduduks`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `votes`
 --
 ALTER TABLE `votes`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
@@ -793,7 +777,6 @@ ALTER TABLE `pertanggung_jawabans`
 ALTER TABLE `votes`
   ADD CONSTRAINT `votes__ibfk__detail` FOREIGN KEY (`laporan`) REFERENCES `detail_laporans` (`id`),
   ADD CONSTRAINT `votes__ibfk__penduduk` FOREIGN KEY (`voter`) REFERENCES `penduduks` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
