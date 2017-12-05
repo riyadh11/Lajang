@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Pengguna;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
-use App\laporan;
+use App\Laporan;
 use App\Kategori;
 use App\Status_Laporan;
 use Illuminate\Support\Collection;
