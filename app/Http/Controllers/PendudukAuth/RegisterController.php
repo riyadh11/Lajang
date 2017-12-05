@@ -113,7 +113,7 @@ class RegisterController extends Controller
                 $penduduk = Penduduk::find($data['id']);
                 $penduduk->activation_token = $data['token'];
                 if($penduduk->Administrator==null){
-                    Notification::send($penduduk, new confirmationAccount($penduduk->nama, $data['token']));
+                    Notification::send($penduduk, new confirmationAccount($penduduk->name, $data['token']));
                 }
                 $penduduk->save();
                 DB::Commit();
