@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Laporan extends Model
 {
     use SoftDeletes ;
-    
+
+    protected $table = 'laporans';
+
     protected $fillable = [
         'judul_laporan', 'pelapor', 'lat', 'long','alamat','kategori','kelurahan'
     ];

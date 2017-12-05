@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Status_Laporan extends Model
 {
 	use SoftDeletes;
+
+    protected $table = 'status_laporans';
 	
     protected $fillable = [
         'nama', 'deskripsi', 'icon',

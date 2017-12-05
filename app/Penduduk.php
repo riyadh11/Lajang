@@ -11,6 +11,8 @@ class Penduduk extends Authenticatable
 {
     use Notifiable, SoftDeletes;
 
+    protected $table = 'penduduks';
+
     /**
      * The attributes that are mass assignable.
      *

@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Administrator extends Authenticatable
 {
     use Notifiable,SoftDeletes;
+    protected $table = 'administrators';
     
     /**
      * The attributes that are mass assignable.

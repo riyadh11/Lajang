@@ -9,6 +9,8 @@ class Kelurahan extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'kelurahans';
+
     protected $fillable = [
         'nama','kecamatan','kodepos'
     ];

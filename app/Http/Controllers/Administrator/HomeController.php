@@ -20,7 +20,7 @@ class HomeController extends Controller
     public function index()
     {
     	$penduduk=Penduduk::withTrashed()->where('status','<','5')->get();
-    	$laporan=$this->getMax(Laporan::withTrashed()->get(), 'Detail_laporan');
+    	$laporan=$this->getMax(Laporan::withTrashed()->get(), 'Detail_Laporan');
     	$kategori=$this->getMax(Kategori::withTrashed()->get(), 'Laporan');
     	$penduduk2=$this->getMax($penduduk,'detail_laporan');
     	$kecamatan=$this->getMax(Kecamatan::withTrashed()->get(), 'Laporan');

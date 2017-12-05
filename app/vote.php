@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class vote extends Model
+class Vote extends Model
 {
     use SoftDeletes;
+
+    protected $table = 'vote';
     
     protected $fillable = [
         'laporan', 'voter', 'like',
