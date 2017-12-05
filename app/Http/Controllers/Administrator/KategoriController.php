@@ -28,7 +28,7 @@ class KategoriController extends Controller
 
     public function index()
     {
-    	$kategoris=Kategori::withTrashed()->get();
+    	$kategoris=Kategori::all();
     	return view('administrator.kategori')->with(compact('kategoris'));
     }
 
@@ -87,6 +87,10 @@ class KategoriController extends Controller
     	return back();
     }
 
+
+///////////////////////////////////////////////
+/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
+
     public function activate($id)
     {
         if($this->sanitize($id,'activate')){
@@ -104,6 +108,10 @@ class KategoriController extends Controller
     	return back();
     }
 
+/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
+/////////////////////////////////////////////
+
+    
     public function sanitize($id,$cat)
     {
         $kategori=Kategori::withTrashed()->where('nama',$id)->first();
@@ -124,7 +132,7 @@ class KategoriController extends Controller
 
     public function list($id)
     {
-        $kategori=Kategori::withTrashed()->where('nama',$id)->first();
+        $kategori=Kategori::where('nama',$id)->first();
         if($kategori!=null){
             $laporan=$kategori->Laporan()->withTrashed()->get();
             return view('administrator.listlaporan')->with(compact('laporan'));

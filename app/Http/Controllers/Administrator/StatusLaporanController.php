@@ -28,7 +28,7 @@ class StatusLaporanController extends Controller
 
     public function index()
     {
-    	$Status_laporans=Status_Laporan::withTrashed()->get();
+    	$Status_laporans=Status_Laporan::all();
     	return view('administrator.statuslaporan')->with(compact('Status_laporans'));
     }
 
@@ -87,6 +87,10 @@ class StatusLaporanController extends Controller
     	return back();
     }
 
+
+///////////////////////////////////////////////
+/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
+    
     public function activate($id)
     {
         if($this->sanitize($id,'activate')){
@@ -103,6 +107,10 @@ class StatusLaporanController extends Controller
         }
     	return back();
     }
+
+
+/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
+///////////////////////////////////////////////
 
     public function sanitize($id,$cat)
     {
@@ -124,9 +132,9 @@ class StatusLaporanController extends Controller
 
     public function list($id)
     {
-        $Status_laporan=Status_Laporan::withTrashed()->where('nama',$id)->first();
+        $Status_laporan=Status_Laporan::where('nama',$id)->first();
         if($Status_laporan!=null){
-            $laporan=$Status_laporan->Laporan()->withTrashed()->get();
+            $laporan=$Status_laporan->Laporan()->all();
             return view('administrator.listlaporan')->with(compact('laporan'));
         }else{
             return redirect('/administrator/status/laporan');

@@ -27,7 +27,7 @@ class KelurahanController extends Controller
 
     public function index()
     {
-    	$kelurahans=Kelurahan::withTrashed()->get();
+    	$kelurahans=Kelurahan::all();
         $kecamatans=Kecamatan::all();
     	return view('administrator.kelurahan')->with(compact('kelurahans','kecamatans'));
     }
@@ -83,6 +83,9 @@ class KelurahanController extends Controller
     	return back();
     }
 
+///////////////////////////////////////////////
+/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
+
     public function activate($id)
     {
         if($this->sanitize($id,'activate')){
@@ -98,6 +101,11 @@ class KelurahanController extends Controller
     	return back();
     }
 
+
+/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
+///////////////////////////////////////////////
+
+    
     public function sanitize($id,$cat)
     {
         $Kelurahan=Kelurahan::withTrashed()->where('nama',$id)->first();
@@ -118,7 +126,7 @@ class KelurahanController extends Controller
 
     public function list($id)
     {
-        $Kelurahan=Kelurahan::withTrashed()->where('nama',$id)->first();
+        $Kelurahan=Kelurahan::where('nama',$id)->first();
         if($Kelurahan!=null){
             $laporan=$Kelurahan->Laporan->all();
             return view('administrator.listlaporan')->with(compact('laporan'));

@@ -376,7 +376,7 @@
                         <div class="form-group">
                             <label for="nama" class="col-md-4 control-label">Keterangan</label>
                             <div class="col-md-6">
-                                <textarea readonly="true" class="form-control">{{$laporan->pertanggungJawaban->keterangan}}</textarea>
+                                <textarea readonly="true" class="form-control">{{$laporan->PertanggungJawaban->keterangan}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -385,7 +385,7 @@
                         <div class="form-group">
                             <label for="nama" class="col-md-4 control-label">Kendala</label>
                             <div class="col-md-6">
-                                <textarea readonly="true" class="form-control">{{$laporan->pertanggungJawaban->kendala}}</textarea>
+                                <textarea readonly="true" class="form-control">{{$laporan->PertanggungJawaban->kendala}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -394,7 +394,7 @@
                         <div class="form-group">
                             <label for="nama" class="col-md-4 control-label">Solusi</label>
                             <div class="col-md-6">
-                                <textarea readonly="true" class="form-control">{{$laporan->pertanggungJawaban->solusi}}</textarea>
+                                <textarea readonly="true" class="form-control">{{$laporan->PertanggungJawaban->solusi}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -403,7 +403,7 @@
                         <div class="form-group">
                             <label for="nama" class="col-md-4 control-label">Administrator</label>
                             <div class="col-md-6">
-                                <input class="form-control" name="admin" value="{{$laporan->pertanggungJawaban->Administrator->name}}" readonly>
+                                <input class="form-control" name="admin" value="{{$laporan->PertanggungJawaban->Administrator->name}}" readonly>
                             </div>
                         </div>
                     </div>
@@ -421,7 +421,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                            @foreach($laporan->pertanggungJawaban->Biaya as $step=>$biaya)
+                            @foreach($laporan->PertanggungJawaban->Biaya as $step=>$biaya)
                             <tr>
                             <td>{{$step+1}}</td>
                             <td>{{$biaya->nama}}</td>

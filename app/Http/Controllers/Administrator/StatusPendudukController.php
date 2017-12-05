@@ -28,7 +28,7 @@ class StatusPendudukController extends Controller
 
     public function index()
     {
-    	$Status_penduduks=Status_Penduduk::withTrashed()->get();
+    	$Status_penduduks=Status_Penduduk::all();
     	return view('administrator.statuspenduduk')->with(compact('Status_penduduks'));
     }
 
@@ -87,6 +87,10 @@ class StatusPendudukController extends Controller
     	return back();
     }
 
+
+///////////////////////////////////////////////
+/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
+    
     public function activate($id)
     {
         if($this->sanitize($id,'activate')){
@@ -103,6 +107,9 @@ class StatusPendudukController extends Controller
         }
     	return back();
     }
+
+/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
+///////////////////////////////////////////////
 
     public function sanitize($id,$cat)
     {
@@ -124,7 +131,7 @@ class StatusPendudukController extends Controller
 
     public function list($id)
     {
-        $Status=Status_Penduduk::withTrashed()->where('nama',$id)->first();
+        $Status=Status_Penduduk::where('nama',$id)->first();
         if($Status!=null){
             $penduduks=$Status->Penduduk()->withTrashed()->get();
             return view('administrator.penduduk')->with(compact('penduduks'));

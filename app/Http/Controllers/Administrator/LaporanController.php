@@ -41,7 +41,7 @@ class LaporanController extends Controller
 
     public function list()
     {
-      $laporan=Laporan::withTrashed()->get();
+      $laporan=Laporan::all();
       return view('administrator.listlaporan')->with(compact('laporan'));
     }   
 
@@ -182,6 +182,10 @@ class LaporanController extends Controller
         }
     }
 
+
+///////////////////////////////////////////////
+/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
+
     public function activate($id,Request $request)
     {
       $exp=explode("+", $id);
@@ -206,5 +210,8 @@ class LaporanController extends Controller
         }
       
     }
+
+/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
+///////////////////////////////////////////////
 
 }

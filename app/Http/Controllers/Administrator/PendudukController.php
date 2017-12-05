@@ -12,7 +12,7 @@ class PendudukController extends Controller
 {
     public function index()
     {
-    	$penduduks=Penduduk::withTrashed()->where('status','<',5)->get();
+    	$penduduks=Penduduk::where('status','<',5)->get();
     	return view('administrator.penduduk')->with(compact('penduduks'));
     }
 
@@ -33,6 +33,10 @@ class PendudukController extends Controller
     	return back();
     }
 
+    
+///////////////////////////////////////////////
+/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
+
     public function activate($id)
     {
         if($this->sanitize($id,'activate')){
@@ -49,6 +53,10 @@ class PendudukController extends Controller
         }
     	return back();
     }
+
+
+/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
+///////////////////////////////////////////////
 
     public function sanitize($id,$cat)
     {
@@ -70,7 +78,7 @@ class PendudukController extends Controller
 
     public function list($id)
     {
-        $Penduduk=Penduduk::withTrashed()->where('nik',$id)->first();
+        $Penduduk=Penduduk::where('nik',$id)->first();
         if($Penduduk!=null){
             $laporan=$Penduduk->Laporan->all();
             return view('administrator.listlaporan')->with(compact('laporan'));
