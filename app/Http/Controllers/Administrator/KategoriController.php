@@ -21,7 +21,7 @@ class KategoriController extends Controller
     public function index()
     {
     	$kategoris=Kategori::withTrashed()->get();
-    	return view('Administrator.Kategori')->with(compact('kategoris'));
+    	return view('administrator.kategori')->with(compact('kategoris'));
     }
 
     public function update(Request $request)

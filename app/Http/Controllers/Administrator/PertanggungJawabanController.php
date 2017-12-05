@@ -59,7 +59,7 @@ class PertanggungJawabanController extends LaporanController
         }else if($laporan->pertanggungjawaban!=null){
           $lpj=false;
         }
-        return view('Administrator.pertanggungjawaban')->with(compact('lpj','laporan'));
+        return view('administrator.pertanggungjawaban')->with(compact('lpj','laporan'));
         }
     }
 

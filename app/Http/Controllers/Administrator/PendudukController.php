@@ -13,7 +13,7 @@ class PendudukController extends Controller
     public function index()
     {
     	$penduduks=Penduduk::withTrashed()->where('status','<',5)->get();
-    	return view('Administrator.Penduduk')->with(compact('penduduks'));
+    	return view('administrator.penduduk')->with(compact('penduduks'));
     }
 
     public function remove($id)

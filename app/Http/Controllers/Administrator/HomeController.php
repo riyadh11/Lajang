@@ -25,7 +25,7 @@ class HomeController extends Controller
     	$penduduk2=$this->getMax($penduduk,'detail_laporan');
     	$kecamatan=$this->getMax(Kecamatan::withTrashed()->get(), 'Laporan');
     	$kelurahan=$this->getMax(Kecamatan::withTrashed()->get(), 'Laporan');
-      return view('Administrator.Home')->with(compact('penduduk','laporan','kategori','penduduk2','kecamatan','kelurahan'));
+      return view('administrator.home')->with(compact('penduduk','laporan','kategori','penduduk2','kecamatan','kelurahan'));
     }
 
     public function getMax($collection,$param)

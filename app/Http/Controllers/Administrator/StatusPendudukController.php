@@ -21,7 +21,7 @@ class StatusPendudukController extends Controller
     public function index()
     {
     	$Status_penduduks=Status_penduduk::withTrashed()->get();
-    	return view('Administrator.StatusPenduduk')->with(compact('Status_penduduks'));
+    	return view('administrator.statuspenduduk')->with(compact('Status_penduduks'));
     }
 
     public function update(Request $request)
@@ -111,7 +111,7 @@ class StatusPendudukController extends Controller
         $Status=Status_penduduk::withTrashed()->where('nama',$id)->first();
         if($Status!=null){
             $penduduks=$Status->Penduduk()->withTrashed()->get();
-            return view('administrator.Penduduk')->with(compact('penduduks'));
+            return view('administrator.penduduk')->with(compact('penduduks'));
         }else{
             return redirect('/administrator/penduduk');
         }

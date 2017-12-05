@@ -20,7 +20,7 @@ class KecamatanController extends Controller
     public function index()
     {
     	$kecamatans=Kecamatan::withTrashed()->get();
-    	return view('Administrator.Kecamatan')->with(compact('kecamatans'));
+    	return view('administrator.kecamatan')->with(compact('kecamatans'));
     }
 
     public function index_k($id)

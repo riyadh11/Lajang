@@ -15,6 +15,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-      return view('penduduk.Home');
+      return view('penduduk.home');
     }
 }

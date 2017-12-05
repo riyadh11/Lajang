@@ -22,7 +22,7 @@ class KelurahanController extends Controller
     {
     	$kelurahans=Kelurahan::withTrashed()->get();
         $kecamatans=kecamatan::all();
-    	return view('Administrator.Kelurahan')->with(compact('kelurahans','kecamatans'));
+    	return view('administrator.kelurahan')->with(compact('kelurahans','kecamatans'));
     }
 
     public function update(Request $request)
