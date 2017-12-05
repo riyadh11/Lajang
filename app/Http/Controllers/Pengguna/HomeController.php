@@ -8,9 +8,16 @@ use Validator;
 use App\laporan;
 use App\Kategori;
 use App\Status_Laporan;
+use Illuminate\Support\Collection;
 
 class HomeController extends Controller
 {
+
+    public function index()
+    {
+        return view('welcome');
+    }
+
     public function list()
     {
     	$laporan=Laporan::all();
@@ -57,4 +64,21 @@ class HomeController extends Controller
             return redirect('/laporan');
         }
     }
+
+    public function search($param,$page=0, Request $request)
+    {
+        $string= explode(' ', $param);
+        $laporan=new Collection();
+        foreach ($string as $key) {
+            $Clapor=Laporan::where('judul_laporan','like','%'.$key.'%')->orWhere('alamat','like','%'.$key.'%')->get();
+            foreach ($Clapor as $lapor) {
+                $laporan=$laporan->push($lapor);
+            }
+        }
+         $laporan=$laporan->unique('id');
+         $laporan = $laporan->forPage($page, 10);
+         $laporan=collect($laporan->all());
+        return view('pengguna.listlaporan')->with(compact('laporan'));
+    }
+
 }

@@ -19,6 +19,8 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    <script src="/js/app.js"></script>
+    
 </head>
 <body>
     <nav class="navbar navbar-default navbar-static-top">
@@ -80,7 +82,6 @@
     @yield('content')
 
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.min.css"><script> </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.6/sweetalert2.min.js"></script>
     

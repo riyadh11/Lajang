@@ -11,13 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Pengguna\HomeController@index');
 Route::get('/laporan','Pengguna\HomeController@list');
 Route::get('/laporan/{id}','Pengguna\HomeController@show');
 Route::get('/kategori/{id}','Pengguna\HomeController@kategori');
 Route::get('/status/{id}','Pengguna\HomeController@status');
+Route::get('/laporan/cari/{param}', 'Pengguna\HomeController@search');
+Route::get('/laporan/cari/{param}/page/{page}', 'Pengguna\HomeController@search');
 
 Route::group(['prefix' => 'penduduk'], function () {
   Route::get('/login', 'PendudukAuth\LoginController@showLoginForm')->name('penduduk.login');
