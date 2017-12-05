@@ -65,7 +65,7 @@ class LaporanController extends Controller
           $request->session()->flash('warning','Laporan sudah selesai!');
           return redirect('/administrator/laporan'); 
         }else{
-          return view('administrator.editLaporan')->with(compact('laporan','kategoris','statuses'));
+          return view('administrator.editlaporan')->with(compact('laporan','kategoris','statuses'));
         }
       }
 

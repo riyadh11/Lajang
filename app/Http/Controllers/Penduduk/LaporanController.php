@@ -114,7 +114,7 @@ class LaporanController extends Controller
        return redirect('/penduduk/home'); 
        $request->session()->flash('warning', 'Laporan tidak ditemukan!');
       }else{
-       return view('penduduk.editLaporan')->with(compact('laporan','kategoris'));
+       return view('penduduk.editlaporan')->with(compact('laporan','kategoris'));
       }
       }
 
