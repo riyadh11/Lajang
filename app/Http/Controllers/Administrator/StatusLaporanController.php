@@ -18,6 +18,14 @@ class StatusLaporanController extends Controller
         ]);
     }
 
+    protected function validatorUbahStatus_laporan(array $data)
+    {
+        return Validator::make($data, [
+            'nama' => 'required|max:20',
+            'deskripsi' => 'required|max:100',
+        ]);
+    }
+
     public function index()
     {
     	$Status_laporans=Status_Laporan::withTrashed()->get();
@@ -26,9 +34,9 @@ class StatusLaporanController extends Controller
 
     public function update(Request $request)
     {
-        $validator=$this->validatorBuatStatus_laporan($request->toArray());
+        $validator=$this->validatorUbahStatus_laporan($request->toArray());
         if($validator->fails()){
-
+            $request->session()->flash('warning','Operasi gagal!');
         }else{
             try{
                 DB::BeginTransaction();
@@ -37,7 +45,7 @@ class StatusLaporanController extends Controller
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
         return back();
@@ -56,7 +64,7 @@ class StatusLaporanController extends Controller
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
         return back();
@@ -73,7 +81,7 @@ class StatusLaporanController extends Controller
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
     	return back();
@@ -90,7 +98,7 @@ class StatusLaporanController extends Controller
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
     	return back();

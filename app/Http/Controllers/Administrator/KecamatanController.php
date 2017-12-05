@@ -17,6 +17,13 @@ class KecamatanController extends Controller
         ]);
     }
 
+    protected function validatorUbahKecamatan(array $data)
+    {
+        return Validator::make($data, [
+            'nama' => 'required|max:50',
+        ]);
+    }
+
     public function index()
     {
     	$kecamatans=Kecamatan::withTrashed()->get();
@@ -37,9 +44,9 @@ class KecamatanController extends Controller
 
     public function update(Request $request)
     {
-        $validator=$this->validatorBuatKecamatan($request->toArray());
+        $validator=$this->validatorUbahKecamatan($request->toArray());
         if($validator->fails()){
-
+            $request->session()->flash('warning','Operasi gagal!');
         }else{
             try{
                 DB::BeginTransaction();
@@ -48,7 +55,7 @@ class KecamatanController extends Controller
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
         return back();
@@ -58,7 +65,7 @@ class KecamatanController extends Controller
     {
         $validator=$this->validatorBuatKecamatan($request->toArray());
         if($validator->fails()){
-
+            $request->session()->flash('warning','Operasi gagal!');
         }else{
             try{
                 DB::BeginTransaction();
@@ -67,7 +74,7 @@ class KecamatanController extends Controller
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
         return back();
@@ -84,7 +91,7 @@ class KecamatanController extends Controller
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
     	return back();

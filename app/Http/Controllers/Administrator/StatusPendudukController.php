@@ -18,6 +18,14 @@ class StatusPendudukController extends Controller
         ]);
     }
 
+    protected function validatorUbahStatus_penduduk(array $data)
+    {
+        return Validator::make($data, [
+            'nama' => 'required|max:20',
+            'deskripsi' => 'required|max:100',
+        ]);
+    }
+
     public function index()
     {
     	$Status_penduduks=Status_Penduduk::withTrashed()->get();
@@ -26,9 +34,9 @@ class StatusPendudukController extends Controller
 
     public function update(Request $request)
     {
-        $validator=$this->validatorBuatStatus_penduduk($request->toArray());
+        $validator=$this->validatorUbahStatus_penduduk($request->toArray());
         if($validator->fails()){
-
+            $request->session()->flash('warning','Operasi gagal!');
         }else{
             try{
                 DB::BeginTransaction();
@@ -37,7 +45,7 @@ class StatusPendudukController extends Controller
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
         return back();
@@ -47,7 +55,7 @@ class StatusPendudukController extends Controller
     {
         $validator=$this->validatorBuatStatus_penduduk($request->toArray());
         if($validator->fails()){
-
+            $request->session()->flash('warning','Operasi gagal!');
         }else{
             try{
                 DB::BeginTransaction();
@@ -56,7 +64,7 @@ class StatusPendudukController extends Controller
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
         return back();
@@ -73,7 +81,7 @@ class StatusPendudukController extends Controller
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
     	return back();
@@ -90,7 +98,7 @@ class StatusPendudukController extends Controller
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
     	return back();

@@ -14,6 +14,13 @@ class KelurahanController extends Controller
     protected function validatorBuatKelurahan(array $data)
     {
         return Validator::make($data, [
+            'nama' => 'required|max:50|unique:kelurahans',
+        ]);
+    }
+
+    protected function validatorUbahKelurahan(array $data)
+    {
+        return Validator::make($data, [
             'nama' => 'required|max:50',
         ]);
     }
@@ -27,9 +34,9 @@ class KelurahanController extends Controller
 
     public function update(Request $request)
     {
-        $validator=$this->validatorBuatKelurahan($request->toArray());
+        $validator=$this->validatorUbahKelurahan($request->toArray());
         if($validator->fails()){
-
+            $request->session()->flash('warning','Operasi gagal!');
         }else{
             try{
                 DB::BeginTransaction();
@@ -38,7 +45,7 @@ class KelurahanController extends Controller
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
         return back();
@@ -48,7 +55,7 @@ class KelurahanController extends Controller
     {
         $validator=$this->validatorBuatKelurahan($request->toArray());
         if($validator->fails()){
-
+            $request->session()->flash('warning','Operasi gagal!');
         }else{
             try{
                 DB::BeginTransaction();

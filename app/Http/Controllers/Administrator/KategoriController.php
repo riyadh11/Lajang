@@ -18,6 +18,14 @@ class KategoriController extends Controller
         ]);
     }
 
+    protected function validatorUbahKategori(array $data)
+    {
+        return Validator::make($data, [
+            'nama' => 'required|max:20',
+            'deskripsi' => 'required|max:100',
+        ]);
+    }
+
     public function index()
     {
     	$kategoris=Kategori::withTrashed()->get();
@@ -26,9 +34,9 @@ class KategoriController extends Controller
 
     public function update(Request $request)
     {
-        $validator=$this->validatorBuatKategori($request->toArray());
+        $validator=$this->validatorUbahKategori($request->toArray());
         if($validator->fails()){
-
+            $request->session()->flash('warning','Operasi gagal!');
         }else{
             try{
                 DB::BeginTransaction();
@@ -37,7 +45,7 @@ class KategoriController extends Controller
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
         return back();
@@ -47,7 +55,7 @@ class KategoriController extends Controller
     {
         $validator=$this->validatorBuatKategori($request->toArray());
         if($validator->fails()){
-
+            $request->session()->flash('warning','Operasi gagal!');
         }else{
             try{
                 DB::BeginTransaction();
@@ -56,7 +64,7 @@ class KategoriController extends Controller
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
         return back();
@@ -73,7 +81,7 @@ class KategoriController extends Controller
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
     	return back();
@@ -90,7 +98,7 @@ class KategoriController extends Controller
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
     	return back();
