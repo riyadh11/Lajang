@@ -21,7 +21,7 @@ class StatusLaporanController extends Controller
     public function index()
     {
     	$Status_laporans=Status_Laporan::withTrashed()->get();
-    	return view('Administrator.StatusLaporan')->with(compact('Status_laporans'));
+    	return view('administrator.statuslaporan')->with(compact('Status_laporans'));
     }
 
     public function update(Request $request)
