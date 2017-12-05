@@ -8,7 +8,7 @@ use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-use App\laporan;
+use App\Laporan;
 use App\Penduduk;
 use App\Kelurahan;
 use App\Kategori;
@@ -36,7 +36,7 @@ class LaporanController extends Controller
 
     public function list()
     {
-      $laporan=\Auth::user()->laporan->all();
+      $laporan=\Auth::user()->Laporan->all();
       return view('penduduk.listlaporan')->with(compact('laporan'));
     }  
 
@@ -64,8 +64,8 @@ class LaporanController extends Controller
       try{
        DB::beginTransaction();
        $penduduk=Penduduk::find(\Auth::user()->id);
-       $laporan=$penduduk->laporan()->create(['judul_laporan'=>$request['judul_laporan'], 'lat'=>$request['lat'], 'long'=>$request['long'],'pelapor'=>\Auth::user()->id, 'kategori'=>$request['kategori'],'alamat' => $locate['alamat'],'kelurahan'=>$kelurahan->id]);
-       $detail_laporan=$laporan->detail_laporan()->create(['penduduk'=>\Auth::user()->id, 'komentar'=>$request['deskripsi']]);
+       $laporan=$penduduk->Laporan()->create(['judul_laporan'=>$request['judul_laporan'], 'lat'=>$request['lat'], 'long'=>$request['long'],'pelapor'=>\Auth::user()->id, 'kategori'=>$request['kategori'],'alamat' => $locate['alamat'],'kelurahan'=>$kelurahan->id]);
+       $detail_laporan=$laporan->Detail_Laporan()->create(['penduduk'=>\Auth::user()->id, 'komentar'=>$request['deskripsi']]);
         
         if($request->hasfile('foto')){
          $files = $request->file('foto');
@@ -81,7 +81,7 @@ class LaporanController extends Controller
           $nama_file='progress-'.md5($detail_laporan->id).'-'.time().$step.'.'.$ext;
           $nama_folder='laporan_'.md5($laporan->id).'_'.$laporan->judul_laporan.'/';
           Storage::disk('data-laporan')->put($nama_folder.$nama_file , File::get($request['foto'][$step]));
-          $detail_laporan->foto_laporan()->create(['url_gambar'=>$nama_folder.$nama_file]);
+          $detail_laporan->Foto_Laporan()->create(['url_gambar'=>$nama_folder.$nama_file]);
          }
         }
        DB::commit();
@@ -140,8 +140,8 @@ class LaporanController extends Controller
       try{
        DB::beginTransaction();
        $penduduk=Penduduk::find(\Auth::user()->id);
-       $laporan=$penduduk->laporan()->where('id',$request['id'])->update(['judul_laporan'=>$request['judul_laporan'], 'lat'=>$request['lat'], 'long'=>$request['long'],'pelapor'=>\Auth::user()->id, 'kategori'=>$request['kategori'],'alamat' => $locate['alamat'], 'kelurahan'=>$kelurahan->id]);
-       $detail=laporan::find($request['id'])->detail_laporan->first();
+       $laporan=$penduduk->Laporan()->where('id',$request['id'])->update(['judul_laporan'=>$request['judul_laporan'], 'lat'=>$request['lat'], 'long'=>$request['long'],'pelapor'=>\Auth::user()->id, 'kategori'=>$request['kategori'],'alamat' => $locate['alamat'], 'kelurahan'=>$kelurahan->id]);
+       $detail=laporan::find($request['id'])->Detail_Laporan->first();
        $detail->komentar=$request['deskripsi'];
        $detail->save();
        DB::commit();
@@ -170,11 +170,6 @@ class LaporanController extends Controller
       }
       $location = array('alamat' => $data,'kodepos' => $data2 );
       return $location;
-    }
-
-    public function FunctionName($value='')
-    {
-      # code...
     }
 
 

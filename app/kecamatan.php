@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Kelurahan;
 
-class kecamatan extends Model
+class Kecamatan extends Model
 {
     use SoftDeletes;
 

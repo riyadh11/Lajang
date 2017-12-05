@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class kelurahan extends Model
+class Kelurahan extends Model
 {
     use SoftDeletes;
 
@@ -15,7 +15,7 @@ class kelurahan extends Model
 
     public function Kecamatan()
     {
-    	return $this->belongsTo('App\kecamatan','kecamatan');
+    	return $this->belongsTo('App\Kecamatan','kecamatan');
     }
 
     public function Laporan()

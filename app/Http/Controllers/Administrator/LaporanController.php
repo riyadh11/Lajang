@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Notification;
-use App\laporan;
+use App\Laporan;
 use App\Kategori;
 use App\Penduduk;
 use App\Kelurahan;
@@ -55,7 +55,7 @@ class LaporanController extends Controller
         $judul_laporan=$exp[0];
         $lat=$exp[1];
         $long=$exp[2];
-        $laporan=laporan::where(['judul_laporan'=>$judul_laporan,'lat'=>$lat,'long'=>$long])->first();
+        $laporan=Laporan::where(['judul_laporan'=>$judul_laporan,'lat'=>$lat,'long'=>$long])->first();
         $kategoris=Kategori::all();
         $statuses=Status_Laporan::all();
         if($laporan==null or $laporan->trashed()){

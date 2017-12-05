@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class laporan extends Model
+class Laporan extends Model
 {
     use SoftDeletes ;
     
@@ -20,27 +20,27 @@ class laporan extends Model
 
     public function Detail_Laporan()
     {
-    	return $this->hasMany('App\detail_laporan','laporan');
+    	return $this->hasMany('App\Detail_Laporan','laporan');
     }
 
     public function Status()
     {
-    	return $this->belongsTo('App\status_laporan','status');
+    	return $this->belongsTo('App\Status_Laporan','status');
     }
 
     public function Kategori()
     {
-        return $this->belongsTo('App\kategori','kategori');
+        return $this->belongsTo('App\Kategori','kategori');
     }
 
     public function Kelurahan()
     {
-        return $this->belongsTo('App\kelurahan','kelurahan');
+        return $this->belongsTo('App\Kelurahan','kelurahan');
     }
 
     public function PertanggungJawaban()
     {
-        return $this->hasOne('App\pertanggung_jawaban','laporan');
+        return $this->hasOne('App\Pertanggung_Jawaban','laporan');
     }
 
     public function delete()

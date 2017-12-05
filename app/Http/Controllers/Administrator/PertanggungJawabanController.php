@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Support\Facades\DB;
-use App\laporan;
+use App\Laporan;
 use App\Kategori;
 use App\Penduduk;
 use App\Kelurahan;
@@ -49,14 +49,14 @@ class PertanggungJawabanController extends LaporanController
         $lat=$exp[1];
         $long=$exp[2];
 
-        $laporan=laporan::where(['judul_laporan'=>$judul_laporan,'lat'=>$lat,'long'=>$long])->first();
+        $laporan=Laporan::where(['judul_laporan'=>$judul_laporan,'lat'=>$lat,'long'=>$long])->first();
         if($laporan==null or $laporan->trashed()){
          $request->session()->flash('status','Tidak ditemukan!');
          return back();
         }else if($laporan->status!=4){
           $request->session()->flash('warning','LPJ Belum boleh dibuat!');
          return back();
-        }else if($laporan->pertanggungjawaban!=null){
+        }else if($laporan->PertanggungJawaban!=null){
           $lpj=false;
         }
         return view('administrator.pertanggungjawaban')->with(compact('lpj','laporan'));
@@ -65,7 +65,7 @@ class PertanggungJawabanController extends LaporanController
 
     public function store(Request $request)
     {
-      $laporan=laporan::find($request['laporan']);
+      $laporan=Laporan::find($request['laporan']);
       $validatorBuat=$this->validatorBuatLPJ($request->toArray());
       if($validatorBuat->fails()){
         $request->session()->flash('warning','Input tidak valid!');

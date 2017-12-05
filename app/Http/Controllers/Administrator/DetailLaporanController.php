@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Notification;
-use App\laporan;
-use App\Detail_laporan;
+use App\Laporan;
+use App\Detail_Laporan;
 use App\Penduduk;
 use App\Notifications\notifyProgress;
 
@@ -34,7 +34,7 @@ class DetailLaporanController extends Controller
         $request->session()->flash('warning','Laporan sudah selesai!');
         return back();
        }
-        $detail_laporan=$laporan->Detail_laporan()->create(['penduduk'=>$penduduk->id, 'komentar'=>$request['komentar']]);
+        $detail_laporan=$laporan->Detail_Laporan()->create(['penduduk'=>$penduduk->id, 'komentar'=>$request['komentar']]);
         if($request->hasfile('foto')){
          $files = $request->file('foto');
          foreach ($files as $step=> $foto) {
@@ -63,7 +63,7 @@ class DetailLaporanController extends Controller
     {
       try{
         DB::beginTransaction();
-        Detail_laporan::where(['id'=>$id])->delete();
+        Detail_Laporan::where(['id'=>$id])->delete();
         DB::commit();
       }catch(Exception $e){
         DB::rollback();
@@ -75,7 +75,7 @@ class DetailLaporanController extends Controller
     {
       try{
         DB::beginTransaction();
-        $data=Detail_laporan::where(['id'=>$request['id'],'laporan'=>$request['id-laporan']])->first();
+        $data=Detail_Laporan::where(['id'=>$request['id'],'laporan'=>$request['id-laporan']])->first();
         $data->update(['komentar'=>$request['komentar']]);
         if($data->Laporan->status==4){
         $request->session()->flash('warning','Laporan sudah selesai!');

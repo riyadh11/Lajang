@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Status_laporan;
+use App\Status_Laporan;
 use Validator;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +20,7 @@ class StatusLaporanController extends Controller
 
     public function index()
     {
-    	$Status_laporans=Status_laporan::withTrashed()->get();
+    	$Status_laporans=Status_Laporan::withTrashed()->get();
     	return view('Administrator.StatusLaporan')->with(compact('Status_laporans'));
     }
 
@@ -32,7 +32,7 @@ class StatusLaporanController extends Controller
         }else{
             try{
                 DB::BeginTransaction();
-                Status_laporan::where('id',$request['id'])->update(['nama'=>$request['nama'],'deskripsi'=>$request['deskripsi'], 'icon'=>$request['icon']]);
+                Status_Laporan::where('id',$request['id'])->update(['nama'=>$request['nama'],'deskripsi'=>$request['deskripsi'], 'icon'=>$request['icon']]);
                 DB::Commit();
             }catch(Exception $e){
                 DB::Rollback();
@@ -49,7 +49,7 @@ class StatusLaporanController extends Controller
         }else{
             try{
                 DB::BeginTransaction();
-                Status_laporan::create(['nama'=>$request['nama'],'deskripsi'=>$request['deskripsi'],'icon'=>$request['icon']]);
+                Status_Laporan::create(['nama'=>$request['nama'],'deskripsi'=>$request['deskripsi'],'icon'=>$request['icon']]);
                 DB::Commit();
             }catch(Exception $e){
                 DB::Rollback();
@@ -63,7 +63,7 @@ class StatusLaporanController extends Controller
         if($this->sanitize($id,'remove')){
             try{
                 DB::BeginTransaction();
-                $Status_laporan=Status_laporan::where('nama',$id)->first();
+                $Status_laporan=Status_Laporan::where('nama',$id)->first();
                 $Status_laporan->delete();
                 DB::Commit();
             }catch(Exception $e){
@@ -78,7 +78,7 @@ class StatusLaporanController extends Controller
         if($this->sanitize($id,'activate')){
             try{
                 DB::BeginTransaction();
-                $Status_laporan=Status_laporan::withTrashed()->where('nama',$id)->first();
+                $Status_laporan=Status_Laporan::withTrashed()->where('nama',$id)->first();
                 $Status_laporan->restore();
                 DB::Commit();
             }catch(Exception $e){
@@ -90,7 +90,7 @@ class StatusLaporanController extends Controller
 
     public function sanitize($id,$cat)
     {
-        $Status_laporan=Status_laporan::withTrashed()->where('nama',$id)->first();
+        $Status_laporan=Status_Laporan::withTrashed()->where('nama',$id)->first();
         if($Status_laporan==null){
             return false;
         }
@@ -108,7 +108,7 @@ class StatusLaporanController extends Controller
 
     public function list($id)
     {
-        $Status_laporan=Status_laporan::withTrashed()->where('nama',$id)->first();
+        $Status_laporan=Status_Laporan::withTrashed()->where('nama',$id)->first();
         if($Status_laporan!=null){
             $laporan=$Status_laporan->Laporan()->withTrashed()->get();
             return view('administrator.listlaporan')->with(compact('laporan'));

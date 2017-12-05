@@ -47,7 +47,7 @@ class Administrator extends Authenticatable
 
     public function PertanggungJawaban()
     {
-        return $this->hasMany('App\pertanggung_jawaban','administrator');
+        return $this->hasMany('App\Pertanggung_Jawaban','administrator');
     }
 
     public function delete()

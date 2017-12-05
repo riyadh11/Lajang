@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class status_laporan extends Model
+class Status_Laporan extends Model
 {
 	use SoftDeletes;
 	

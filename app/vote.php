@@ -16,7 +16,7 @@ class vote extends Model
 
     public function Laporan()
     {
-    	return $this->belongsTo('App\detail_laporan','laporan');
+    	return $this->belongsTo('App\Detail_Laporan','laporan');
     }
 
     public function Voter()

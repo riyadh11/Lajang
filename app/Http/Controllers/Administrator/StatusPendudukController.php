@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Status_penduduk;
+use App\Status_Penduduk;
 use Validator;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +20,7 @@ class StatusPendudukController extends Controller
 
     public function index()
     {
-    	$Status_penduduks=Status_penduduk::withTrashed()->get();
+    	$Status_penduduks=Status_Penduduk::withTrashed()->get();
     	return view('administrator.statuspenduduk')->with(compact('Status_penduduks'));
     }
 
@@ -32,7 +32,7 @@ class StatusPendudukController extends Controller
         }else{
             try{
                 DB::BeginTransaction();
-                Status_penduduk::where('id',$request['id'])->update(['nama'=>$request['nama'],'deskripsi'=>$request['deskripsi']]);
+                Status_Penduduk::where('id',$request['id'])->update(['nama'=>$request['nama'],'deskripsi'=>$request['deskripsi']]);
                 DB::Commit();
             }catch(Exception $e){
                 DB::Rollback();
@@ -49,7 +49,7 @@ class StatusPendudukController extends Controller
         }else{
             try{
                 DB::BeginTransaction();
-                Status_penduduk::create(['nama'=>$request['nama'],'deskripsi'=>$request['deskripsi']]);
+                Status_Penduduk::create(['nama'=>$request['nama'],'deskripsi'=>$request['deskripsi']]);
                 DB::Commit();
             }catch(Exception $e){
                 DB::Rollback();
@@ -63,7 +63,7 @@ class StatusPendudukController extends Controller
         if($this->sanitize($id,'remove')){
             try{
                 DB::BeginTransaction();
-                $Status_penduduk=Status_penduduk::where('nama',$id)->first();
+                $Status_penduduk=Status_Penduduk::where('nama',$id)->first();
                 $Status_penduduk->delete();
                 DB::Commit();
             }catch(Exception $e){
@@ -78,7 +78,7 @@ class StatusPendudukController extends Controller
         if($this->sanitize($id,'activate')){
             try{
                 DB::BeginTransaction();
-                $Status_penduduk=Status_penduduk::withTrashed()->where('nama',$id)->first();
+                $Status_penduduk=Status_Penduduk::withTrashed()->where('nama',$id)->first();
                 $Status_penduduk->restore();
                 DB::Commit();
             }catch(Exception $e){
@@ -90,7 +90,7 @@ class StatusPendudukController extends Controller
 
     public function sanitize($id,$cat)
     {
-        $Status_penduduk=Status_penduduk::withTrashed()->where('nama',$id)->first();
+        $Status_penduduk=Status_Penduduk::withTrashed()->where('nama',$id)->first();
         if($Status_penduduk==null){
             return false;
         }
@@ -108,7 +108,7 @@ class StatusPendudukController extends Controller
 
     public function list($id)
     {
-        $Status=Status_penduduk::withTrashed()->where('nama',$id)->first();
+        $Status=Status_Penduduk::withTrashed()->where('nama',$id)->first();
         if($Status!=null){
             $penduduks=$Status->Penduduk()->withTrashed()->get();
             return view('administrator.penduduk')->with(compact('penduduks'));

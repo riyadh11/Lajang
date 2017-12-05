@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class kategori extends Model
+class Kategori extends Model
 {
 	use SoftDeletes;
 
@@ -15,7 +15,7 @@ class kategori extends Model
 
     public function Laporan()
     {
-    	return $this->hasMany('App\laporan','kategori');
+    	return $this->hasMany('App\Laporan','kategori');
     }
 
     public function delete()

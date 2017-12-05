@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class detail_laporan extends Model
+class Detail_Laporan extends Model
 {
     use SoftDeletes;
     
@@ -21,17 +21,17 @@ class detail_laporan extends Model
 
     public function Laporan()
     {
-    	return $this->belongsTo('App\laporan','laporan');
+    	return $this->belongsTo('App\Laporan','laporan');
     }
 
     public function Foto_Laporan()
     {
-        return $this->hasMany('App\foto_laporan','laporan');
+        return $this->hasMany('App\Foto_Laporan','laporan');
     }
 
     public function Vote()
     {
-        return $this->hasMany('App\vote','laporan');
+        return $this->hasMany('App\Vote','laporan');
     }
 
     public function delete()

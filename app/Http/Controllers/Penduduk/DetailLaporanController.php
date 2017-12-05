@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Notification;
-use App\laporan;
-use App\Detail_laporan;
+use App\Laporan;;
+use App\Detail_Laporan;
 use App\Penduduk;
 use App\Notifications\notifyProgress;
 
@@ -48,7 +48,7 @@ class DetailLaporanController extends Controller
           $request->session()->flash('warning','Laporan sudah selesai!');
           return back();
         }
-        $detail_laporan=$laporan->detail_laporan()->create(['penduduk'=>$penduduk->id, 'komentar'=>$request['komentar']]);
+        $detail_laporan=$laporan->Detail_Laporan()->create(['penduduk'=>$penduduk->id, 'komentar'=>$request['komentar']]);
         if($request->hasfile('foto')){
          $files = $request->file('foto');
          foreach ($files as $step=> $foto) {
@@ -76,7 +76,7 @@ class DetailLaporanController extends Controller
     public function remove($id,Request $request)
     {
       $penduduk=Penduduk::find(\Auth::user()->id);
-      $laporan=$penduduk->detail_laporan()->where('id', $id)->first();
+      $laporan=$penduduk->Detail_Laporan()->where('id', $id)->first();
       if($penduduk==null or $laporan==null){
          $request->session()->flash('warning','Tidak ada yang bisa dihapus!');
          return back();

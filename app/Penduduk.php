@@ -47,12 +47,12 @@ class Penduduk extends Authenticatable
 
     public function Detail_Laporan()
     {
-        return $this->hasMany('App\detail_laporan','penduduk');
+        return $this->hasMany('App\Detail_Laporan','penduduk');
     }
 
     public function Vote()
     {
-        return $this->hasMany('App\vote','voter');
+        return $this->hasMany('App\Vote','voter');
     }
 
     public function Administrator()
@@ -62,7 +62,7 @@ class Penduduk extends Authenticatable
 
     public function Status()
     {
-        return $this->belongsTo('App\Status_penduduk','status');
+        return $this->belongsTo('App\Status_Penduduk','status');
     }
 
     public function delete()

@@ -8,7 +8,7 @@ use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-use App\Detail_laporan;
+use App\Detail_Laporan;
 use App\Penduduk;
 
 class VoteController extends Controller
@@ -31,14 +31,14 @@ class VoteController extends Controller
         return back(); 
        }
        $penduduk=Penduduk::find(\Auth::user()->id);
-       $laporan=Detail_laporan::find($request['detail_laporan']);
+       $laporan=Detail_Laporan::find($request['detail_laporan']);
        if($penduduk==null or $laporan==null or $laporan->penduduk == $penduduk->id){
         $request->session()->flash('warning','Operasi tidak diperbolehkan!');
         return back();
        }
       try{
        DB::beginTransaction();
-        $detail_laporan=$laporan->vote()->firstOrNew(['voter'=>\Auth::user()->id]);
+        $detail_laporan=$laporan->Vote()->firstOrNew(['voter'=>\Auth::user()->id]);
         $detail_laporan->like=$request['like'];
         $detail_laporan->save();
        DB::commit();

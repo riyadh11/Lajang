@@ -21,7 +21,7 @@ class KelurahanController extends Controller
     public function index()
     {
     	$kelurahans=Kelurahan::withTrashed()->get();
-        $kecamatans=kecamatan::all();
+        $kecamatans=Kecamatan::all();
     	return view('administrator.kelurahan')->with(compact('kelurahans','kecamatans'));
     }
 

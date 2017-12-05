@@ -8,10 +8,10 @@ use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-use App\Detail_laporan;
+use App\Detail_Laporan;
 use App\Penduduk;
-use App\kategori;
-use App\laporan;
+use App\Kategori;
+use App\Laporan;
 use App\Kecamatan;
 
 class HomeController extends Controller
@@ -20,8 +20,8 @@ class HomeController extends Controller
     public function index()
     {
     	$penduduk=Penduduk::withTrashed()->where('status','<','5')->get();
-    	$laporan=$this->getMax(laporan::withTrashed()->get(), 'Detail_laporan');
-    	$kategori=$this->getMax(kategori::withTrashed()->get(), 'Laporan');
+    	$laporan=$this->getMax(Laporan::withTrashed()->get(), 'Detail_laporan');
+    	$kategori=$this->getMax(Kategori::withTrashed()->get(), 'Laporan');
     	$penduduk2=$this->getMax($penduduk,'detail_laporan');
     	$kecamatan=$this->getMax(Kecamatan::withTrashed()->get(), 'Laporan');
     	$kelurahan=$this->getMax(Kecamatan::withTrashed()->get(), 'Laporan');

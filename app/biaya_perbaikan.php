@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class biaya_perbaikan extends Model
+class Biaya_Perbaikan extends Model
 {
     use SoftDeletes;
 	
@@ -15,6 +15,6 @@ class biaya_perbaikan extends Model
 
     public function Laporan()
     {
-    	return $this->belongsTo('App\pertanggung_jawaban','laporan');
+    	return $this->belongsTo('App\Pertanggung_Jawaban','laporan');
     }
 }

@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class status_penduduk extends Model
+class Status_Penduduk extends Model
 {
 	use SoftDeletes;
 	
@@ -15,7 +15,7 @@ class status_penduduk extends Model
 
     public function Penduduk()
     {
-    	return $this->hasMany('App\penduduk','status');
+    	return $this->hasMany('App\Penduduk','status');
     }
 
     public function delete()
