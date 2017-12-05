@@ -13,6 +13,7 @@ use App\Penduduk;
 use App\Kategori;
 use App\Laporan;
 use App\Kecamatan;
+use App\Kelurahan;
 
 class HomeController extends Controller
 {
@@ -24,7 +25,7 @@ class HomeController extends Controller
     	$kategori=$this->getMax(Kategori::withTrashed()->get(), 'Laporan');
     	$penduduk2=$this->getMax($penduduk,'detail_laporan');
     	$kecamatan=$this->getMax(Kecamatan::withTrashed()->get(), 'Laporan');
-    	$kelurahan=$this->getMax(Kecamatan::withTrashed()->get(), 'Laporan');
+    	$kelurahan=$this->getMax(Kelurahan::withTrashed()->get(), 'Laporan');
       return view('administrator.home')->with(compact('penduduk','laporan','kategori','penduduk2','kecamatan','kelurahan'));
     }
 

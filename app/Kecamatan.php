@@ -19,7 +19,7 @@ class Kecamatan extends Model
 
     public function Kelurahan()
     {
-    	return $this->hasMany('App\kelurahan','kecamatan');
+    	return $this->hasMany('App\Kelurahan','kecamatan');
     }
 
     public function delete()
