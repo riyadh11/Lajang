@@ -45,8 +45,10 @@ class KecamatanController extends Controller
                 DB::BeginTransaction();
                 Kecamatan::where('id',$request['id'])->update(['nama'=>$request['nama']]);
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
         return back();
@@ -62,8 +64,10 @@ class KecamatanController extends Controller
                 DB::BeginTransaction();
                 Kecamatan::create(['nama'=>$request['nama']]);
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
         return back();
@@ -77,8 +81,10 @@ class KecamatanController extends Controller
                 $Kecamatan=Kecamatan::where('nama',$id)->first();
                 $Kecamatan->delete();
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
     	return back();

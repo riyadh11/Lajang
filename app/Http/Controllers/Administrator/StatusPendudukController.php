@@ -34,8 +34,10 @@ class StatusPendudukController extends Controller
                 DB::BeginTransaction();
                 Status_Penduduk::where('id',$request['id'])->update(['nama'=>$request['nama'],'deskripsi'=>$request['deskripsi']]);
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
         return back();
@@ -51,8 +53,10 @@ class StatusPendudukController extends Controller
                 DB::BeginTransaction();
                 Status_Penduduk::create(['nama'=>$request['nama'],'deskripsi'=>$request['deskripsi']]);
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
         return back();
@@ -66,8 +70,10 @@ class StatusPendudukController extends Controller
                 $Status_penduduk=Status_Penduduk::where('nama',$id)->first();
                 $Status_penduduk->delete();
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
     	return back();
@@ -81,8 +87,10 @@ class StatusPendudukController extends Controller
                 $Status_penduduk=Status_Penduduk::withTrashed()->where('nama',$id)->first();
                 $Status_penduduk->restore();
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
     	return back();

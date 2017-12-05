@@ -34,8 +34,10 @@ class KategoriController extends Controller
                 DB::BeginTransaction();
                 Kategori::where('id',$request['id'])->update(['nama'=>$request['nama'],'deskripsi'=>$request['deskripsi']]);
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
         return back();
@@ -51,8 +53,10 @@ class KategoriController extends Controller
                 DB::BeginTransaction();
                 Kategori::create(['nama'=>$request['nama'],'deskripsi'=>$request['deskripsi']]);
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
         return back();
@@ -66,8 +70,10 @@ class KategoriController extends Controller
                 $kategori=Kategori::where('nama',$id)->first();
                 $kategori->delete();
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
     	return back();
@@ -81,8 +87,10 @@ class KategoriController extends Controller
                 $kategori=Kategori::withTrashed()->where('nama',$id)->first();
                 $kategori->restore();
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
     	return back();

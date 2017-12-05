@@ -24,8 +24,10 @@ class PendudukController extends Controller
                 $Penduduk=Penduduk::where('nik',$id)->first();
                 $Penduduk->delete();
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
     	return back();
@@ -39,8 +41,10 @@ class PendudukController extends Controller
                 $Penduduk=Penduduk::withTrashed()->where('nik',$id)->first();
                 $Penduduk->restore();
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
     	return back();

@@ -34,8 +34,10 @@ class StatusLaporanController extends Controller
                 DB::BeginTransaction();
                 Status_Laporan::where('id',$request['id'])->update(['nama'=>$request['nama'],'deskripsi'=>$request['deskripsi'], 'icon'=>$request['icon']]);
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
         return back();
@@ -51,8 +53,10 @@ class StatusLaporanController extends Controller
                 DB::BeginTransaction();
                 Status_Laporan::create(['nama'=>$request['nama'],'deskripsi'=>$request['deskripsi'],'icon'=>$request['icon']]);
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
         return back();
@@ -66,8 +70,10 @@ class StatusLaporanController extends Controller
                 $Status_laporan=Status_Laporan::where('nama',$id)->first();
                 $Status_laporan->delete();
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
     	return back();
@@ -81,8 +87,10 @@ class StatusLaporanController extends Controller
                 $Status_laporan=Status_Laporan::withTrashed()->where('nama',$id)->first();
                 $Status_laporan->restore();
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
     	return back();

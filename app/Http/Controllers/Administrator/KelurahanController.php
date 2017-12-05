@@ -35,8 +35,10 @@ class KelurahanController extends Controller
                 DB::BeginTransaction();
                 Kelurahan::where('id',$request['id'])->update(['nama'=>$request['nama'],'kecamatan'=>$request['kecamatan'],'kodepos'=>$request['kodepos']]);
                 DB::Commit();
+                $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
+                $request->session()->flash('warning','Oprasi gagal!');
             }
         }
         return back();
