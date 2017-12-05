@@ -10,7 +10,7 @@ class Vote extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'vote';
+    protected $table = 'votes';
     
     protected $fillable = [
         'laporan', 'voter', 'like',
