@@ -44,7 +44,7 @@ class Penduduk extends Authenticatable
 
     public function Laporan()
     {
-        return $this->hasMany('App\laporan','pelapor');   
+        return $this->hasMany('App\Laporan','pelapor');   
     }
 
     public function Detail_Laporan()
