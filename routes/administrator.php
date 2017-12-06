@@ -79,3 +79,6 @@ Route::post('/daerah/kelurahan/buat','Administrator\KelurahanController@store');
 Route::post('/daerah/kelurahan/ubah','Administrator\KelurahanController@update');
 Route::get('/daerah/kelurahan/hapus/{id}','Administrator\KelurahanController@remove');
 Route::get('/daerah/kelurahan/aktivasi/{id}','Administrator\KelurahanController@activate');
+
+Route::get('/profil','Administrator\PendudukController@profil');
+Route::post('/profil/ubah','Administrator\PendudukController@update');

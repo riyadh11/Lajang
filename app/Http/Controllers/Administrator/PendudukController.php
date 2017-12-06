@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Penduduk;
 use Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class PendudukController extends Controller
 {
@@ -95,5 +97,34 @@ class PendudukController extends Controller
         }else{
             return redirect('/administrator/penduduk');
         }
+    }
+
+    public function update(Request $request)
+    {
+        $penduduk=Penduduk::find(\Auth::guard('administrator')->user()->penduduk);
+        if($request->hasFile('foto')){
+            try{
+                DB::beginTransaction();
+                $ext=$request['foto']->getClientOriginalExtension();
+                $nama_file='foto-'.md5($penduduk->name).'-'.time().'.'.$ext;
+                $nama_folder='foto_'.md5($penduduk->id).'/';
+                Storage::disk('data-penduduk')->put($nama_folder.$nama_file , File::get($request['foto']));
+                $penduduk->url_foto=$nama_folder.$nama_file;
+                $penduduk->save();
+                DB::commit();
+                $request->session()->flash('success','sukses ubah foto profil');
+            }catch(Exception $e){
+                DB::rollback();
+                $request->session()->flash('warning','gagal ubah foto profil');
+            }
+        }
+
+        return redirect('/administrator/profil');
+    }
+
+    public function profil()
+    {
+      $administrator=\Auth::guard()->user();
+      return view('administrator.profil')->with(compact('administrator'));
     }
 }
