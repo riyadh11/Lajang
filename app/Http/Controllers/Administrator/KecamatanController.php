@@ -20,6 +20,7 @@ class KecamatanController extends Controller
     protected function validatorUbahKecamatan(array $data)
     {
         return Validator::make($data, [
+            'id'=>'required|exists:kecamatans,id',
             'nama' => 'required|max:50',
         ]);
     }
@@ -80,7 +81,7 @@ class KecamatanController extends Controller
         return back();
     }
 
-    public function remove($id)
+    public function remove($id,Request $request)
     {
         if($this->sanitize($id,'remove')){
             try{
@@ -101,7 +102,7 @@ class KecamatanController extends Controller
 ///////////////////////////////////////////////
 /////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
 
-    public function activate($id)
+    public function activate($id,Request $request)
     {
         if($this->sanitize($id,'activate')){
             try{

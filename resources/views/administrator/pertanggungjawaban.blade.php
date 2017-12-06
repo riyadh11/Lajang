@@ -11,7 +11,7 @@
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
                       <!-- Indicators -->
                       <ol class="carousel-indicators">
-                        @foreach($laporan->detail_laporan->first()->foto_laporan->all() as $step=>$foto)
+                        @foreach($laporan->Komentar->first()->foto_laporan->all() as $step=>$foto)
                         @if($step==0)
                         <li data-target="#myCarousel" data-slide-to="{{$step}}" class="active"></li>
                         @else
@@ -24,7 +24,7 @@
                       <div class="carousel-inner">
 
                         
-                        @foreach($laporan->detail_laporan->first()->foto_laporan->all() as $step=>$foto)
+                        @foreach($laporan->Komentar->first()->foto_laporan->all() as $step=>$foto)
                                 @if($step==0)
                                 <div class="item active">
                                   <img src="/storage/data-laporan/{{$foto->url_gambar}}" alt="{{$laporan->judul_laporan}}">
@@ -97,7 +97,7 @@
                             <label for="email" class="col-md-4 control-label">Deskripsi</label>
 
                             <div class="col-md-6">
-                                <input id="deskripsi" type="text" class="form-control" name="deskripsi" value="{{$laporan->detail_laporan->first()->komentar}}" readonly>
+                                <input id="deskripsi" type="text" class="form-control" name="deskripsi" value="{{$laporan->Komentar->first()->komentar}}" readonly>
                             </div>
                         </div>                        
                     </div>
@@ -113,8 +113,8 @@
                     <br>
                     <br>
                     <div class="form-horizontal">
-                        @if(count($laporan->detail_laporan)>1)
-                        @foreach($laporan->detail_laporan->where('delete',0) as $step=>$lapor)
+                        @if(count($laporan->Komentar)>1)
+                        @foreach($laporan->Komentar->where('delete',0) as $step=>$lapor)
                         @if($step!=0)
                         <div class="form-group">
                             <label for="email" class="col-md-4 control-label">{{\App\Penduduk::find($lapor->penduduk)->name}}</label>
@@ -241,7 +241,7 @@
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
                       <!-- Indicators -->
                       <ol class="carousel-indicators">
-                        @foreach($laporan->detail_laporan->first()->foto_laporan->all() as $step=>$foto)
+                        @foreach($laporan->Komentar->first()->foto_laporan->all() as $step=>$foto)
                         @if($step==0)
                         <li data-target="#myCarousel" data-slide-to="{{$step}}" class="active"></li>
                         @else
@@ -254,7 +254,7 @@
                       <div class="carousel-inner">
 
                         
-                        @foreach($laporan->detail_laporan->first()->foto_laporan->all() as $step=>$foto)
+                        @foreach($laporan->Komentar->first()->foto_laporan->all() as $step=>$foto)
                                 @if($step==0)
                                 <div class="item active">
                                   <img src="/storage/data-laporan/{{$foto->url_gambar}}" alt="{{$laporan->judul_laporan}}">
@@ -327,7 +327,7 @@
                             <label for="email" class="col-md-4 control-label">Deskripsi</label>
 
                             <div class="col-md-6">
-                                <input id="deskripsi" type="text" class="form-control" name="deskripsi" value="{{$laporan->detail_laporan->first()->komentar}}" readonly>
+                                <input id="deskripsi" type="text" class="form-control" name="deskripsi" value="{{$laporan->Komentar->first()->komentar}}" readonly>
                             </div>
                         </div>                        
                     </div>
@@ -343,8 +343,8 @@
                     <br>
                     <br>
                     <div class="form-horizontal">
-                        @if(count($laporan->detail_laporan)>1)
-                        @foreach($laporan->detail_laporan->where('delete',0) as $step=>$lapor)
+                        @if(count($laporan->Komentar)>1)
+                        @foreach($laporan->Komentar->where('delete',0) as $step=>$lapor)
                         @if($step!=0)
                         <div class="form-group">
                             <label for="email" class="col-md-4 control-label">{{\App\Penduduk::find($lapor->penduduk)->name}}</label>

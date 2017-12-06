@@ -54,7 +54,7 @@
                             <label for="email" class="col-md-4 control-label">Deskripsi</label>
 
                             <div class="col-md-6">
-                                <input id="deskripsi" type="text" class="form-control" name="deskripsi" value="{{$laporan->detail_laporan->first()->komentar}}">
+                                <input id="deskripsi" type="text" class="form-control" name="deskripsi" value="{{$laporan->Komentar->first()->komentar}}">
                             </div>
                         </div>
                         

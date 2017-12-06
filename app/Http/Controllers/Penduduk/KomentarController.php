@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Notification;
 use App\Laporan;;
-use App\Detail_Laporan;
+use App\Komentar;
 use App\Penduduk;
 use App\Notifications\notifyProgress;
 
-class DetailLaporanController extends Controller
+class KomentarController extends Controller
 {
 
     protected function validatorBuatLaporan(array $data)
@@ -39,7 +39,7 @@ class DetailLaporanController extends Controller
       try{
        DB::beginTransaction();
        $penduduk=Penduduk::find(\Auth::user()->id);
-       $laporan=Laporan::find($request['detail_laporan']);
+       $laporan=Laporan::find($request['id']);
        if($penduduk==null or $laporan==null){
          $request->session()->flash('warning','Tidak ada yang bisa disimpan!');
          return back();
@@ -48,7 +48,7 @@ class DetailLaporanController extends Controller
           $request->session()->flash('warning','Laporan sudah selesai!');
           return back();
         }
-        $detail_laporan=$laporan->Detail_Laporan()->create(['penduduk'=>$penduduk->id, 'komentar'=>$request['komentar']]);
+        $Komentar=$laporan->Komentar()->create(['penduduk'=>$penduduk->id, 'komentar'=>$request['komentar']]);
         if($request->hasfile('foto')){
          $files = $request->file('foto');
          foreach ($files as $step=> $foto) {
@@ -58,14 +58,14 @@ class DetailLaporanController extends Controller
            DB::rollback();
           }
           $ext=$request['foto'][$step]->getClientOriginalExtension();
-          $nama_file='progress-'.md5($detail_laporan->id).'-'.time().$step.'.'.$ext;
+          $nama_file='progress-'.md5($Komentar->id).'-'.time().$step.'.'.$ext;
           $nama_folder='laporan_'.md5($laporan->id).'_'.$laporan->judul_laporan.'/';
           Storage::disk('data-laporan')->put($nama_folder.$nama_file , File::get($request['foto'][$step]));
-          $detail_laporan->foto_laporan()->create(['url_gambar'=>$nama_folder.$nama_file]);
+          $Komentar->foto_laporan()->create(['url_gambar'=>$nama_folder.$nama_file]);
          }
         }
        $pelapor=$laporan->Penduduk;
-       Notification::send($pelapor, new notifyProgress($pelapor->name,$laporan->judul_laporan,$detail_laporan->komentar));
+       Notification::send($pelapor, new notifyProgress($pelapor->name,$laporan->judul_laporan,$Komentar->komentar));
        DB::commit();
       }catch(Exception $e){
        DB::rollback();
@@ -73,10 +73,13 @@ class DetailLaporanController extends Controller
        return back(); 
     }
 
+///////////////////////////////////////////////
+/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
+    
     public function remove($id,Request $request)
     {
       $penduduk=Penduduk::find(\Auth::user()->id);
-      $laporan=$penduduk->Detail_Laporan()->where('id', $id)->first();
+      $laporan=$penduduk->Komentar()->where('id', $id)->first();
       if($penduduk==null or $laporan==null){
          $request->session()->flash('warning','Tidak ada yang bisa dihapus!');
          return back();
@@ -96,10 +99,13 @@ class DetailLaporanController extends Controller
       return back();
     }
 
+/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////    
+///////////////////////////////////////////////
+
     public function update(Request $request)
     {
       $penduduk=Penduduk::find(\Auth::user()->id);
-      $data=Detail_laporan::where(['id'=>$request['id'],'laporan'=>$request['id-laporan'],'penduduk'=>$penduduk->id])->first();
+      $data=Komentar::where(['id'=>$request['id'],'laporan'=>$request['id-laporan'],'penduduk'=>$penduduk->id])->first();
       if($penduduk==null or $data==null){
         $request->session()->flash('warning','Tidak ada yang bisa diubah!');
         return back();

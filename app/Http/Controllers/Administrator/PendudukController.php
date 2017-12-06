@@ -16,47 +16,46 @@ class PendudukController extends Controller
     	return view('administrator.penduduk')->with(compact('penduduks'));
     }
 
-    public function remove($id)
+    public function remove($id,Request $request)
     {
         if($this->sanitize($id,'remove')){
             try{
                 DB::BeginTransaction();
                 $Penduduk=Penduduk::where('nik',$id)->first();
+                if($Penduduk->status==6){
+                    $request->session()->flash('warning','Operasi gagal!');
+                    return back();
+                }
                 $Penduduk->delete();
                 DB::Commit();
                 $request->session()->flash('success','Operasi berhasil!');
             }catch(Exception $e){
                 DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+                $request->session()->flash('warning','Operasi gagal!');
             }
         }
     	return back();
     }
 
-    
-///////////////////////////////////////////////
-/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
-
-    public function activate($id)
+    public function activate($id,Request $request)
     {
-        if($this->sanitize($id,'activate')){
-            try{
-                DB::BeginTransaction();
-                $Penduduk=Penduduk::withTrashed()->where('nik',$id)->first();
-                $Penduduk->restore();
-                DB::Commit();
+        try{    
+            DB::BeginTransaction();
+            $Penduduk=Penduduk::where('nik',$id)->first();
+            if($Penduduk->status==5){
+                $Penduduk->status=6;
+                $Penduduk->save();
                 $request->session()->flash('success','Operasi berhasil!');
-            }catch(Exception $e){
-                DB::Rollback();
-                $request->session()->flash('warning','Oprasi gagal!');
+            }else{
+                $request->session()->flash('warning','Operasi gagal!');
             }
-        }
-    	return back();
+            DB::Commit();
+        }catch(Exception $e){
+            DB::Rollback();
+            $request->session()->flash('warning','Operasi gagal!');
+        }   
+        return back();
     }
-
-
-/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
-///////////////////////////////////////////////
 
     public function sanitize($id,$cat)
     {
@@ -82,6 +81,17 @@ class PendudukController extends Controller
         if($Penduduk!=null){
             $laporan=$Penduduk->Laporan->all();
             return view('administrator.listlaporan')->with(compact('laporan'));
+        }else{
+            return redirect('/administrator/penduduk');
+        }
+    }
+
+    public function list_detail($id)
+    {
+        $Penduduk=Penduduk::where('nik',$id)->first();
+        if($Penduduk!=null){
+            $laporan=$Penduduk->Komentar->all();
+            return view('administrator.detaillaporan')->with(compact('laporan'));
         }else{
             return redirect('/administrator/penduduk');
         }

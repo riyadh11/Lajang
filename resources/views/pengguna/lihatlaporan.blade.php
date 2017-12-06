@@ -10,7 +10,7 @@
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
                       <!-- Indicators -->
                       <ol class="carousel-indicators">
-                        @foreach($laporan->detail_laporan->first()->foto_laporan->all() as $step=>$foto)
+                        @foreach($laporan->Komentar->first()->foto_laporan->all() as $step=>$foto)
                         @if($step==0)
                         <li data-target="#myCarousel" data-slide-to="{{$step}}" class="active"></li>
                         @else
@@ -23,7 +23,7 @@
                       <div class="carousel-inner">
 
                         
-                        @foreach($laporan->detail_laporan->first()->foto_laporan->all() as $step=>$foto)
+                        @foreach($laporan->Komentar->first()->foto_laporan->all() as $step=>$foto)
                                 @if($step==0)
                                 <div class="item active">
                                   <img src="/storage/data-laporan/{{$foto->url_gambar}}" alt="{{$laporan->judul_laporan}}">
@@ -72,7 +72,7 @@
                             <label for="email" class="col-md-4 control-label">Reputasi Laporan</label>
 
                             <div class="col-md-6">
-                                <input id="Pelapor" type="text" class="form-control" name="lat" value="{{$laporan->detail_laporan->first()->reputation()}}" readonly>
+                                <input id="Pelapor" type="text" class="form-control" name="lat" value="{{$laporan->Komentar->first()->reputation()}}" readonly>
                             </div>
                         </div>
 
@@ -120,12 +120,12 @@
                             <label for="email" class="col-md-4 control-label">Deskripsi</label>
 
                             <div class="col-md-6">
-                                <input id="deskripsi" type="text" class="form-control" name="deskripsi" value="{{$laporan->detail_laporan->first()->komentar}}" readonly>
+                                <input id="deskripsi" type="text" class="form-control" name="deskripsi" value="{{$laporan->Komentar->first()->komentar}}" readonly>
                             </div>
                         </div>
                         <center>
-                            <button class="btn btn-info" onclick="kirim_vote(1,{{$laporan->detail_laporan()->first()->id}})">Suka</button>
-                            <button class="btn btn-danger" onclick="kirim_vote(0,{{$laporan->detail_laporan()->first()->id}})">Tidak suka</button>
+                            <button class="btn btn-info" onclick="kirim_vote(1,{{$laporan->Komentar()->first()->id}})">Suka</button>
+                            <button class="btn btn-danger" onclick="kirim_vote(0,{{$laporan->Komentar()->first()->id}})">Tidak suka</button>
                         </center>
                         
                     </div>
@@ -141,8 +141,8 @@
                     <br>
                     <br>
                     <div class="form-horizontal">
-                        @if(count($laporan->detail_laporan)>1)
-                        @foreach($laporan->detail_laporan->all() as $step=>$lapor)
+                        @if(count($laporan->Komentar)>1)
+                        @foreach($laporan->Komentar->all() as $step=>$lapor)
                         @if($step!=0)
                         <div class="form-group">
                             <label for="email" class="col-md-4 control-label">{{\App\Penduduk::find($lapor->penduduk)->name}}</label>
@@ -200,7 +200,7 @@
                             </div>
                         </div>
 
-                        <input type="hidden" name="detail_laporan" value="{{$laporan->id}}">
+                        <input type="hidden" name="id" value="{{$laporan->id}}">
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
@@ -212,7 +212,7 @@
                     <form id="buat-vote" method="post" action="{{ url('/penduduk/laporan/vote') }}">
                             {{ csrf_field() }}
                             <input type="hidden" id="like" name="like" value="1">
-                            <input type="hidden" id="detail_laporan_vote" name="detail_laporan" value="">
+                            <input type="hidden" id="Komentar_vote" name="id" value="">
                     </form>
                 </div>
             </div>
@@ -241,8 +241,8 @@
                             </div>
                         </div>
 
-                        <input type="hidden" name="id" id="detail_laporan-id" value="">
-                        <input type="hidden" name="id-laporan" id="detail_laporan-id" value="{{$laporan->id}}">
+                        <input type="hidden" name="id" id="Komentar-id" value="">
+                        <input type="hidden" name="id-laporan" id="Komentar-id" value="{{$laporan->id}}">
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
@@ -262,7 +262,7 @@
 <!-- End Modal -->
 <script type="text/javascript">
     function modalEdit($id) {
-        $("#detail_laporan-id").val($id);
+        $("#Komentar-id").val($id);
         $("#Judul-edit").val($("#Judul-"+$id).val());
         $("#myModal").modal('show');
     }
@@ -270,7 +270,7 @@
 <script type="text/javascript">
     function kirim_vote(like,id) {
         $("#like").val(like);
-        $("#detail_laporan_vote").val(id);
+        $("#Komentar_vote").val(id);
         $("#buat-vote").submit();
     }
 </script>

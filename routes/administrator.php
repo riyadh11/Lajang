@@ -11,9 +11,9 @@ Route::post('/laporan/ubah','Administrator\LaporanController@update');
 Route::get('/laporan/hapus/{id}','Administrator\LaporanController@remove');
 //Route::get('/laporan/aktivasi/{id}','Administrator\LaporanController@activate');
 
-Route::post('/laporan/perkembangan/buat','Administrator\DetailLaporanController@store');
-Route::post('/laporan/perkembangan/ubah','Administrator\DetailLaporanController@update');
-Route::get('/laporan/perkembangan/hapus/{id}','Administrator\DetailLaporanController@remove');
+Route::post('/laporan/perkembangan/buat','Administrator\KomentarController@store');
+Route::post('/laporan/perkembangan/ubah','Administrator\KomentarController@update');
+Route::get('/laporan/perkembangan/hapus/{id}','Administrator\KomentarController@remove');
 
 
 Route::get('/laporan/pertanggung-jawaban/{id}','Administrator\PertanggungJawabanController@show');
@@ -55,7 +55,8 @@ Route::get('/status/penduduk/{id}','Administrator\StatusPendudukController@list'
 //Awal Penduduk Controller //
 Route::get('/penduduk','Administrator\PendudukController@index');
 Route::get('/penduduk/{id}','Administrator\PendudukController@list');
-//Route::get('/penduduk/aktivasi/{id}','Administrator\PendudukController@activate');
+Route::get('/penduduk/komentar/{id}','Administrator\PendudukController@list_detail');
+Route::get('/penduduk/aktivasi/{id}','Administrator\PendudukController@activate');
 Route::get('/penduduk/hapus/{id}','Administrator\PendudukController@remove');
 
 // Batas Penduduk Controller //

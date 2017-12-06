@@ -21,6 +21,7 @@ class StatusPendudukController extends Controller
     protected function validatorUbahStatus_penduduk(array $data)
     {
         return Validator::make($data, [
+            'id'=>'required|exists:status_penduduks,id',
             'nama' => 'required|max:20',
             'deskripsi' => 'required|max:100',
         ]);
@@ -70,7 +71,7 @@ class StatusPendudukController extends Controller
         return back();
     }
 
-    public function remove($id)
+    public function remove($id,Request $request)
     {
         if($this->sanitize($id,'remove')){
             try{
@@ -91,7 +92,7 @@ class StatusPendudukController extends Controller
 ///////////////////////////////////////////////
 /////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
     
-    public function activate($id)
+    public function activate($id,Request $request)
     {
         if($this->sanitize($id,'activate')){
             try{

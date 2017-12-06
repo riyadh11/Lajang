@@ -47,9 +47,9 @@ class Penduduk extends Authenticatable
         return $this->hasMany('App\Laporan','pelapor');   
     }
 
-    public function Detail_Laporan()
+    public function Komentar()
     {
-        return $this->hasMany('App\Detail_Laporan','penduduk');
+        return $this->hasMany('App\Komentar','penduduk');
     }
 
     public function Vote()
@@ -75,8 +75,8 @@ class Penduduk extends Authenticatable
             $laporan->delete();
         }
 
-        foreach($this->Detail_Laporan->all() as $detail_laporan){
-            $detail_laporan->delete();
+        foreach($this->Komentar->all() as $Komentar){
+            $Komentar->delete();
         }
 
         foreach($this->Vote->all() as $vote){
@@ -101,8 +101,8 @@ class Penduduk extends Authenticatable
             $laporan->restore();
         }
 
-        foreach($this->Detail_Laporan()->withTrashed()->get() as $detail_laporan){
-            $detail_laporan->restore();
+        foreach($this->Komentar()->withTrashed()->get() as $Komentar){
+            $Komentar->restore();
         }
 
         foreach($this->Vote()->withTrashed()->get() as $vote){
@@ -122,7 +122,7 @@ class Penduduk extends Authenticatable
         $plus=0;
         $negative=0;
         $reputation=0;
-        foreach($this->Detail_Laporan->all() as $laporan){
+        foreach($this->Komentar->all() as $laporan){
             foreach ($laporan->Vote->all() as $vote) {
                 if($vote->like){
                     $plus++;

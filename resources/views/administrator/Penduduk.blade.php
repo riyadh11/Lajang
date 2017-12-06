@@ -29,7 +29,7 @@
                             <td>{{$penduduk->Status->nama}}</td>
                             <td>{{$penduduk->reputation().'%'}}</td>
                             <td>
-                                @if($penduduk->trashed())
+                                @if($penduduk->status==5)
                                 <a href="/administrator/penduduk/aktivasi/{{$penduduk->nik}}"><button class="btn btn-info">Aktivasi</button></a>
                                 @else
                                 <a href="/administrator/penduduk/hapus/{{$penduduk->nik}}"><button class="btn btn-danger">Banned</button></a>

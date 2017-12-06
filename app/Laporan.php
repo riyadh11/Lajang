@@ -20,9 +20,9 @@ class Laporan extends Model
     	return $this->belongsTo('App\Penduduk','pelapor');
     }
 
-    public function Detail_Laporan()
+    public function Komentar()
     {
-    	return $this->hasMany('App\Detail_Laporan','laporan');
+    	return $this->hasMany('App\Komentar','laporan');
     }
 
     public function Status()
@@ -48,8 +48,8 @@ class Laporan extends Model
     public function delete()
     {
 
-        foreach($this->Detail_Laporan->all() as $detail_laporan){
-            $detail_laporan->delete();
+        foreach($this->Komentar->all() as $Komentar){
+            $Komentar->delete();
         }
 
         $p=$this->PertanggungJawaban()->withTrashed()->first();
@@ -62,8 +62,8 @@ class Laporan extends Model
     public function restore()
     {
         parent::restore();
-        foreach($this->Detail_Laporan()->withTrashed()->get() as $detail_laporan){
-            $detail_laporan->restore();
+        foreach($this->Komentar()->withTrashed()->get() as $Komentar){
+            $Komentar->restore();
         }
 
         $p=$this->PertanggungJawaban()->withTrashed()->first();

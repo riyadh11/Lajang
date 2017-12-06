@@ -23,12 +23,12 @@
                             @foreach($laporan as $lapor)
                         <tr>
                             <td><a href="/laporan/{{$lapor->judul_laporan.'+'.$lapor->lat.'+'.$lapor->long}}">{{$lapor->judul_laporan}}</a></td>
-                            <td>{{$lapor->detail_laporan->first()->komentar}}</td>
+                            <td>{{$lapor->Komentar->first()->komentar}}</td>
                             <td>{{$lapor->lat.'-'.$lapor->long}}</td>
                             <td>{{$lapor->created_at}}</td>
                             <td>{{$lapor->penduduk->name}}</td>
                             <td>
-                                @foreach($lapor->detail_laporan->first()->foto_laporan->all() as $step=>$foto)
+                                @foreach($lapor->Komentar->first()->foto_laporan->all() as $step=>$foto)
                                 <a href="/storage/data-laporan/{{$foto->url_gambar}}">Foto {{$step+1}}</a>
                                 @endforeach
                             </td>

@@ -100,7 +100,7 @@ class LaporanController extends Controller
         Notification::send($pelapor, new notifyProgress($pelapor->name,$laporan->judul_laporan,"Laporan anda ".\App\Status_Laporan::find($request['status'])->nama." oleh Administrator LAJANG"));
        }
        $laporan=Laporan::where('id',$request['id'])->update(['judul_laporan'=>$request['judul_laporan'], 'lat'=>$request['lat'], 'long'=>$request['long'],'alamat'=>$locate['alamat'], 'kategori'=>$request['kategori'], 'kelurahan'=>$kelurahan->id, 'status' => $request['status']]);
-       $detail=laporan::find($request['id'])->detail_laporan->first();
+       $detail=laporan::find($request['id'])->Komentar->first();
        $detail->komentar=$request['deskripsi'];
        $detail->save();
        DB::commit();

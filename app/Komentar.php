@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class Detail_Laporan extends Model
+class Komentar extends Model
 {
     use SoftDeletes;
-    protected $table = 'detail_laporans';
+    protected $table = 'komentars';
     
     protected $fillable = [
         'laporan', 'penduduk', 'komentar',

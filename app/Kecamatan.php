@@ -33,8 +33,8 @@ class Kecamatan extends Model
     public function Laporan()
     {
         $laporan=new Collection();
-        foreach($this->Kelurahan()->withTrashed()->get() as $kelurahan){
-            foreach ($kelurahan->Laporan()->withTrashed()->get() as $lapor) {
+        foreach($this->Kelurahan->all() as $kelurahan){
+            foreach ($kelurahan->Laporan->all() as $lapor) {
                 $laporan=$laporan->push($lapor);
             }
         }

@@ -21,8 +21,8 @@ class LaporanController extends Controller
   		return Validator::make($data, [
 
             'judul_laporan' => 'required|max:50',
-            'lat' => 'required|max:100',
-            'long' => 'required|max:100'
+            'lat' => 'required|numeric|max:200',
+            'long' => 'required|numeric|max:200'
         ]);
   	}
 
@@ -65,7 +65,7 @@ class LaporanController extends Controller
        DB::beginTransaction();
        $penduduk=Penduduk::find(\Auth::user()->id);
        $laporan=$penduduk->Laporan()->create(['judul_laporan'=>$request['judul_laporan'], 'lat'=>$request['lat'], 'long'=>$request['long'],'pelapor'=>\Auth::user()->id, 'kategori'=>$request['kategori'],'alamat' => $locate['alamat'],'kelurahan'=>$kelurahan->id]);
-       $detail_laporan=$laporan->Detail_Laporan()->create(['penduduk'=>\Auth::user()->id, 'komentar'=>$request['deskripsi']]);
+       $Komentar=$laporan->Komentar()->create(['penduduk'=>\Auth::user()->id, 'komentar'=>$request['deskripsi']]);
         
         if($request->hasfile('foto')){
          $files = $request->file('foto');
@@ -78,10 +78,10 @@ class LaporanController extends Controller
            return back();
           }
           $ext=$request['foto'][$step]->getClientOriginalExtension();
-          $nama_file='progress-'.md5($detail_laporan->id).'-'.time().$step.'.'.$ext;
+          $nama_file='progress-'.md5($Komentar->id).'-'.time().$step.'.'.$ext;
           $nama_folder='laporan_'.md5($laporan->id).'_'.$laporan->judul_laporan.'/';
           Storage::disk('data-laporan')->put($nama_folder.$nama_file , File::get($request['foto'][$step]));
-          $detail_laporan->Foto_Laporan()->create(['url_gambar'=>$nama_folder.$nama_file]);
+          $Komentar->Foto_Laporan()->create(['url_gambar'=>$nama_folder.$nama_file]);
          }
         }
        DB::commit();
@@ -105,14 +105,13 @@ class LaporanController extends Controller
       $long=$exp[2];
 
       $laporan=laporan::where(['judul_laporan'=>$judul_laporan,'lat'=>$lat,'long'=>$long, 'pelapor' => \Auth::user()->id])->first();
-      if($laporan->status!=1){
-        $request->session()->flash('warning', 'Laporan sedang ditangani!');
-        return back();
-      }
       $kategoris=Kategori::all();
       if($laporan==null){
        return redirect('/penduduk/home'); 
        $request->session()->flash('warning', 'Laporan tidak ditemukan!');
+      }elseif($laporan->status!=1){
+        $request->session()->flash('warning', 'Laporan sedang ditangani!');
+        return back();
       }else{
        return view('penduduk.editlaporan')->with(compact('laporan','kategoris'));
       }
@@ -141,7 +140,7 @@ class LaporanController extends Controller
        DB::beginTransaction();
        $penduduk=Penduduk::find(\Auth::user()->id);
        $laporan=$penduduk->Laporan()->where('id',$request['id'])->update(['judul_laporan'=>$request['judul_laporan'], 'lat'=>$request['lat'], 'long'=>$request['long'],'pelapor'=>\Auth::user()->id, 'kategori'=>$request['kategori'],'alamat' => $locate['alamat'], 'kelurahan'=>$kelurahan->id]);
-       $detail=laporan::find($request['id'])->Detail_Laporan->first();
+       $detail=laporan::find($request['id'])->Komentar->first();
        $detail->komentar=$request['deskripsi'];
        $detail->save();
        DB::commit();

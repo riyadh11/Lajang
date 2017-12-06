@@ -25,11 +25,11 @@
                 <h5><strong>Statistik</strong></h5>
                 Penduduk Terdaftar : {{$penduduk->count()}}
                 <br>
-                Penduduk Paling aktif : {{$penduduk2->name}} ({{$penduduk2->detail_laporan->count()}})
+                Penduduk Paling aktif : {{$penduduk2->name}} ({{$penduduk2->Komentar->count()}})
                 <br>
                 Kategori Paling sering : {{$kategori->nama}} ({{$kategori->laporan->count()}})
                 <br>
-                Laporan Paling rame : {{$laporan->judul_laporan}} ({{$laporan->detail_laporan->count()}})
+                Laporan Paling rame : {{$laporan->judul_laporan}} ({{$laporan->Komentar->count()}})
                 <br>
                 Kecamatan paling sering : {{$kecamatan->nama}} ({{$kecamatan->laporan()->count()}})
                 <br>

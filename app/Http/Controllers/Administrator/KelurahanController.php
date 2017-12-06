@@ -68,7 +68,7 @@ class KelurahanController extends Controller
         return back();
     }
 
-    public function remove($id)
+    public function remove($id,Request $request)
     {
         if($this->sanitize($id,'remove')){
             try{
@@ -86,7 +86,7 @@ class KelurahanController extends Controller
 ///////////////////////////////////////////////
 /////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
 
-    public function activate($id)
+    public function activate($id,Request $request)
     {
         if($this->sanitize($id,'activate')){
             try{
