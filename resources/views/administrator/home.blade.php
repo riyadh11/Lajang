@@ -19,6 +19,7 @@
                     <li><a href="/administrator/status/laporan">Status Laporan</a></li>
                     <li><a href="/administrator/laporan">Laporan</a></li>
                     <li><a href="/administrator/penduduk">Penduduk</a></li>
+                    <li><a href="/administrator/profil">Profil</a></li>
                 </ul>
                 <br>
                 <br>
