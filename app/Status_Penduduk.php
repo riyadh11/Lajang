@@ -28,11 +28,4 @@ class Status_Penduduk extends Model
     	parent::delete();
     }
 
-    public function restore()
-    {
-    	parent::restore();
-    	foreach($this->Penduduk()->withTrashed()->get() as $penduduk){
-    		$penduduk->restore();
-    	}
-    }
 }

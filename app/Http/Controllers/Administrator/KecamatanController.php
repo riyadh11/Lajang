@@ -98,28 +98,6 @@ class KecamatanController extends Controller
     	return back();
     }
 
-
-///////////////////////////////////////////////
-/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
-
-    public function activate($id,Request $request)
-    {
-        if($this->sanitize($id,'activate')){
-            try{
-                DB::BeginTransaction();
-                $Kecamatan=Kecamatan::withTrashed()->where('nama',$id)->first();
-                $Kecamatan->restore();
-                DB::Commit();
-            }catch(Exception $e){
-                DB::Rollback();
-            }
-        }
-    	return back();
-    }
-    
-/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
-///////////////////////////////////////////////
-
     public function sanitize($id,$cat)
     {
         $Kecamatan=Kecamatan::withTrashed()->where('nama',$id)->first();

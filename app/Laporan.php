@@ -59,17 +59,4 @@ class Laporan extends Model
         parent::delete();
     }
 
-    public function restore()
-    {
-        parent::restore();
-        foreach($this->Komentar()->withTrashed()->get() as $Komentar){
-            $Komentar->restore();
-        }
-
-        $p=$this->PertanggungJawaban()->withTrashed()->first();
-        if($p!=null){
-            $p->restore();
-        }
-    }
-
 }

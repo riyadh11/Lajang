@@ -33,11 +33,4 @@ class Kelurahan extends Model
     	parent::delete();
     }
 
-    public function restore()
-    {
-    	parent::restore();
-    	foreach($this->Laporan()->withTrashed()->get() as $laporan){
-    		$laporan->restore();
-    	}
-    }
 }

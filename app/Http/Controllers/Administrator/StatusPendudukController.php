@@ -88,30 +88,6 @@ class StatusPendudukController extends Controller
     	return back();
     }
 
-
-///////////////////////////////////////////////
-/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
-    
-    public function activate($id,Request $request)
-    {
-        if($this->sanitize($id,'activate')){
-            try{
-                DB::BeginTransaction();
-                $Status_penduduk=Status_Penduduk::withTrashed()->where('nama',$id)->first();
-                $Status_penduduk->restore();
-                DB::Commit();
-                $request->session()->flash('success','Operasi berhasil!');
-            }catch(Exception $e){
-                DB::Rollback();
-                $request->session()->flash('warning','Operasi gagal!');
-            }
-        }
-    	return back();
-    }
-
-/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
-///////////////////////////////////////////////
-
     public function sanitize($id,$cat)
     {
         $Status_penduduk=Status_Penduduk::withTrashed()->where('nama',$id)->first();

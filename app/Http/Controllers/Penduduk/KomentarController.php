@@ -73,35 +73,6 @@ class KomentarController extends Controller
        return back(); 
     }
 
-///////////////////////////////////////////////
-/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
-    
-    public function remove($id,Request $request)
-    {
-      $penduduk=Penduduk::find(\Auth::user()->id);
-      $laporan=$penduduk->Komentar()->where('id', $id)->first();
-      if($penduduk==null or $laporan==null){
-         $request->session()->flash('warning','Tidak ada yang bisa dihapus!');
-         return back();
-      }
-      if($data->Laporan->status==4){
-        $request->session()->flash('warning','Laporan sudah selesai!');
-        return back();
-      }
-      try{
-        DB::beginTransaction();
-        $laporan->delete();
-        $request->session()->flash('success','Operasi sukses!');
-        DB::commit();
-      }catch(Exception $e){
-        DB::rollback();
-      }
-      return back();
-    }
-
-/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////    
-///////////////////////////////////////////////
-
     public function update(Request $request)
     {
       $penduduk=Penduduk::find(\Auth::user()->id);

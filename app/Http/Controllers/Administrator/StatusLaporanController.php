@@ -88,31 +88,6 @@ class StatusLaporanController extends Controller
     	return back();
     }
 
-
-///////////////////////////////////////////////
-/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
-    
-    public function activate($id,Request $request)
-    {
-        if($this->sanitize($id,'activate')){
-            try{
-                DB::BeginTransaction();
-                $Status_laporan=Status_Laporan::withTrashed()->where('nama',$id)->first();
-                $Status_laporan->restore();
-                DB::Commit();
-                $request->session()->flash('success','Operasi berhasil!');
-            }catch(Exception $e){
-                DB::Rollback();
-                $request->session()->flash('warning','Operasi gagal!');
-            }
-        }
-    	return back();
-    }
-
-
-/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
-///////////////////////////////////////////////
-
     public function sanitize($id,$cat)
     {
         $Status_laporan=Status_Laporan::withTrashed()->where('nama',$id)->first();

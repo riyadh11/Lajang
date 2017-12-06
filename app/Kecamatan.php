@@ -43,11 +43,4 @@ class Kecamatan extends Model
 
     }
 
-    public function restore()
-    {
-    	parent::restore();
-    	foreach($this->Kelurahan()->withTrashed()->get() as $kelurahan){
-    		$kelurahan->restore();
-    	}
-    }
 }

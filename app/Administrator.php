@@ -58,12 +58,4 @@ class Administrator extends Authenticatable
         }
         parent::delete();
     }
-
-    public function restore()
-    {
-        parent::restore();
-        foreach($this->PertanggungJawaban()->withTrashed()->get() as $laporan){
-            $laporan->restore();
-        }
-    }
 }

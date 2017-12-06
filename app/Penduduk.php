@@ -93,30 +93,6 @@ class Penduduk extends Authenticatable
         parent::delete();
     }
 
-    public function restore()
-    {
-        parent::restore();
-        $this->status=1;
-        foreach($this->Laporan()->withTrashed()->get() as $laporan){
-            $laporan->restore();
-        }
-
-        foreach($this->Komentar()->withTrashed()->get() as $Komentar){
-            $Komentar->restore();
-        }
-
-        foreach($this->Vote()->withTrashed()->get() as $vote){
-            $vote->restore();
-        }
-
-        if($this->Administrator){
-            $admin=$this->Administrator;
-            $admin->restore();
-            $this->status=5;
-        }
-        $this->save();
-    }
-
     public function Reputation()
     {
         $plus=0;

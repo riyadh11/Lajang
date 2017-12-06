@@ -47,18 +47,6 @@ class Komentar extends Model
         parent::delete();
     }
 
-    public function restore()
-    {
-        parent::restore();
-        foreach($this->Foto_Laporan()->withTrashed()->get() as $foto_laporan){
-            $foto_laporan->restore();
-        }
-
-        foreach($this->Vote()->withTrashed()->get() as $vote){
-            $vote->restore();
-        }
-    }
-
     public function Reputation()
     {
         $plus=0;

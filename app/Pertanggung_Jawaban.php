@@ -38,12 +38,4 @@ class Pertanggung_Jawaban extends Model
         parent::delete();
     }
 
-    public function restore()
-    {
-        parent::restore();
-        foreach($this->Biaya()->withTrashed()->get() as $Biaya){
-            $Biaya->restore();
-        }
-    }
-
 }

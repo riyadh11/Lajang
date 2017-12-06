@@ -182,36 +182,4 @@ class LaporanController extends Controller
         }
     }
 
-
-///////////////////////////////////////////////
-/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
-
-    public function activate($id,Request $request)
-    {
-      $exp=explode("+", $id);
-       if(count($exp)!=3){
-        $request->session()->flash('status','Tidak ditemukan!');
-        return redirect('/administrator/home'); 
-       }else{
-        $judul_laporan=$exp[0];
-        $lat=$exp[1];
-        $long=$exp[2];
-        try{
-          DB::beginTransaction();
-          $laporan=laporan::withTrashed()->where(['judul_laporan'=>$judul_laporan,'lat'=>$lat,'long'=>$long])->first();
-          $laporan->restore();
-          DB::commit();
-          $request->session()->flash('success','Operasi berhasil!');
-        }catch(Exception $e){
-          DB::rollback();
-          $request->session()->flash('warning','Operasi gagal!');
-        }
-        return back();
-        }
-      
-    }
-
-/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
-///////////////////////////////////////////////
-
 }

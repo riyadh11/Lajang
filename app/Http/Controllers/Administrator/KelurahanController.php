@@ -82,29 +82,6 @@ class KelurahanController extends Controller
         }
     	return back();
     }
-
-///////////////////////////////////////////////
-/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
-
-    public function activate($id,Request $request)
-    {
-        if($this->sanitize($id,'activate')){
-            try{
-                DB::BeginTransaction();
-                $Kelurahan=Kelurahan::withTrashed()->where('nama',$id)->first();
-                $Kelurahan->restore();
-                DB::Commit();
-            }catch(Exception $e){
-                DB::Rollback();
-            }
-        }
-    	return back();
-    }
-
-
-/////// FUNGSI INI SUDAH TIDAK DIPAKAI ////////
-///////////////////////////////////////////////
-
     
     public function sanitize($id,$cat)
     {
