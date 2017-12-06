@@ -155,7 +155,7 @@
                             @if(Auth::guard('penduduk')->check())
                             @if(Auth::guard('penduduk')->user()->id == $lapor->penduduk)
                             <button class="btn btn-info" onclick="modalEdit({{$lapor->id}})">Edit</button>
-                            <a href="/administrator/laporan/perkembangan/hapus/{{$lapor->id}}"><button class="btn btn-danger">Hapus</button></a>
+                            <a href="/administrator/laporan/komentar/hapus/{{$lapor->id}}"><button class="btn btn-danger">Hapus</button></a>
                             @else
                             <button class="btn btn-info" onclick="kirim_vote(1,{{$lapor->id}})">Suka</button>
                             <button class="btn btn-danger" onclick="kirim_vote(0,{{$lapor->id}})">Tidak suka</button>
@@ -181,7 +181,7 @@
 
                     <br>
                     <br>
-                    <form class="form-horizontal" id="buat-progress" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/penduduk/laporan/perkembangan') }}">
+                    <form class="form-horizontal" id="buat-progress" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/penduduk/laporan/komentar') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group">
@@ -231,7 +231,7 @@
         <h4 class="modal-title">Edit Progress</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" id="edit-progress" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/penduduk/laporan/perkembangan/ubah') }}">
+        <form class="form-horizontal" id="edit-progress" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/penduduk/laporan/komentar/ubah') }}">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="email" class="col-md-4 control-label">Progress</label>
