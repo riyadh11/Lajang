@@ -155,7 +155,7 @@
                             @if(Auth::guard('penduduk')->check())
                             @if(Auth::guard('penduduk')->user()->id == $lapor->penduduk)
                             <button class="btn btn-info" onclick="modalEdit({{$lapor->id}})">Edit</button>
-                            <a href="/administrator/laporan/komentar/hapus/{{$lapor->id}}"><button class="btn btn-danger">Hapus</button></a>
+                            <a href="/penduduk/laporan/komentar/hapus/{{$lapor->id}}"><button class="btn btn-danger">Hapus</button></a>
                             @else
                             <button class="btn btn-info" onclick="kirim_vote(1,{{$lapor->id}})">Suka</button>
                             <button class="btn btn-danger" onclick="kirim_vote(0,{{$lapor->id}})">Tidak suka</button>
