@@ -96,4 +96,22 @@ class KomentarController extends Controller
       return back();
     }
 
+    public function remove($id,Request $request)
+    {
+      try{
+        DB::beginTransaction();
+        $penduduk=Penduduk::find(\Auth::user()->id);
+        $data=Komentar::where(['id'=>$id,'penduduk'=>$penduduk->id])->first();
+        if($data->Laporan->status==4){
+        $request->session()->flash('warning','Laporan sudah selesai!');
+        return back();
+        }
+        Komentar::where(['id'=>$id])->delete();
+        DB::commit();
+      }catch(Exception $e){
+        DB::rollback();
+      }
+      return back();
+    }
+
 }
