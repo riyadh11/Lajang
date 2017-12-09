@@ -108,6 +108,7 @@ class KomentarController extends Controller
         }
         Komentar::where(['id'=>$id])->delete();
         DB::commit();
+         $request->session()->flash('success','Operasi sukses!');
       }catch(Exception $e){
         DB::rollback();
       }
